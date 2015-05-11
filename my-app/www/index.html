@@ -29,99 +29,123 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Chrissy en Linda app</title>
         <script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>
-    <script type="text/javascript" charset="utf-8">
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
 
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
 
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
 
-    // onSuccess Geolocation
-    //
-    function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          +                                   position.timestamp          + '<br />';
-    }
+        // onSuccess Geolocation
+        //
+        function onSuccess(position) {
+            var element = document.getElementById('geolocation');
+            element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                                'Longitude: '          + position.coords.longitude             + '<br />' +
+                                'Altitude: '           + position.coords.altitude              + '<br />' +
+                                'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                                'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                                'Heading: '            + position.coords.heading               + '<br />' +
+                                'Speed: '              + position.coords.speed                 + '<br />' +
+                                'Timestamp: '          +                                   position.timestamp          + '<br />';
+        }
 
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n');
-    }
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+        }
 
+          var geocoder;
+
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+        } 
+        //Get the latitude and the longitude;
+        function successFunction(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            codeLatLng(lat, lng)
+        }
+
+        function errorFunction(){
+            alert("Geocoder failed");
+        }
+
+          function initialize() {
+            geocoder = new google.maps.Geocoder();
+        }
+
+          function codeLatLng(lat, lng) {
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({'latLng': latlng}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+              console.log(results)
+                if (results[1]) {
+                 //formatted address
+                 alert(results[0].formatted_address)
+                //find country name
+                     for (var i=0; i<results[0].address_components.length; i++) {
+                    for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+                    //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                        if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                            //this is the object you are looking for
+                            city= results[0].address_components[i];
+                            break;
+                        }
+                    }
+                }
+                //city data
+                alert(city.short_name + " " + city.long_name)
+
+
+                } else {
+                  alert("No results found");
+                }
+              } else {
+                alert("Geocoder failed due to: " + status);
+              }
+            });
+        }
+
+        function takePicture(){
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL
+        });
+
+        function onSuccess(imageData) {
+            var image = document.getElementById('myImage');
+            image.src = "data:image/jpeg;base64," + imageData;
+        }
+
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI });
+
+        function onSuccess(imageURI) {
+            var image = document.getElementById('myImage');
+            image.src = imageURI;
+        }
+
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }}
     </script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript"> 
-  var geocoder;
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-} 
-//Get the latitude and the longitude;
-function successFunction(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    codeLatLng(lat, lng)
-}
-
-function errorFunction(){
-    alert("Geocoder failed");
-}
-
-  function initialize() {
-    geocoder = new google.maps.Geocoder();
-
-
-
-  }
-
-  function codeLatLng(lat, lng) {
-
-    var latlng = new google.maps.LatLng(lat, lng);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-      console.log(results)
-        if (results[1]) {
-         //formatted address
-         alert(results[0].formatted_address)
-        //find country name
-             for (var i=0; i<results[0].address_components.length; i++) {
-            for (var b=0;b<results[0].address_components[i].types.length;b++) {
-
-            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
-                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
-                    //this is the object you are looking for
-                    city= results[0].address_components[i];
-                    break;
-                }
-            }
-        }
-        //city data
-        alert(city.short_name + " " + city.long_name)
-
-
-        } else {
-          alert("No results found");
-        }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-  }
-</script>
     </head>
     <body onload="initialize()">
         <div class="app">
@@ -129,42 +153,9 @@ function errorFunction(){
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
-                <p>Dit is de app van Chrissy en Linda!! Woehoeee</p>
-                <p id="geolocation">Finding geolocation...</p>
-                <button onClick="takePicture();">klik hier</button>
-                <script type="text/javascript">
-                function takePicture(){
-navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.DATA_URL
-});
-
-function onSuccess(imageData) {
-    var image = document.getElementById('myImage');
-    image.src = "data:image/jpeg;base64," + imageData;
-}
-
-function onFail(message) {
-    alert('Failed because: ' + message);
-}
-
-navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.FILE_URI });
-
-function onSuccess(imageURI) {
-    var image = document.getElementById('myImage');
-    image.src = imageURI;
-}
-
-function onFail(message) {
-    alert('Failed because: ' + message);
-}}
-</script>
             </div>
+            <p id="geolocation">Finding geolocation...</p>
+            <button onClick="takePicture();">klik hier</button>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
     </body>
 </html>
