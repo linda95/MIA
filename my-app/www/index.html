@@ -29,7 +29,6 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Chrissy en Linda app</title>
         <script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
@@ -118,7 +117,7 @@
                 alert("Geocoder failed due to: " + status);
               }
             });
-          }
+        }
 
         function takePicture(){
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
@@ -146,6 +145,7 @@
             alert('Failed because: ' + message);
         }}
     </script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     </head>
     <body onload="initialize()">
         <div class="app">
