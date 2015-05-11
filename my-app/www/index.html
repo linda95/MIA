@@ -36,6 +36,34 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
                 <p>Dit is de app van Chrissy en Linda!! Woehoeee</p>
+                <button onClick="takePicture();">klik hier</button>
+                <script type="text/javascript">
+                function takePicture(){
+navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    destinationType: Camera.DestinationType.DATA_URL
+});
+
+function onSuccess(imageData) {
+    var image = document.getElementById('myImage');
+    image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+
+navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    destinationType: Camera.DestinationType.FILE_URI });
+
+function onSuccess(imageURI) {
+    var image = document.getElementById('myImage');
+    image.src = imageURI;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}}
+</script>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
