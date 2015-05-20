@@ -30,6 +30,7 @@
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
         <title>Chrissy en Linda app</title>
         <script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>
+<<<<<<< HEAD
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -64,6 +65,47 @@
             var geocoder;
 
         if (navigator.geolocation) {
+=======
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+
+        // onSuccess Geolocation
+        //
+        function onSuccess(position) {
+            var element = document.getElementById('geolocation');
+            element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                                'Longitude: '          + position.coords.longitude             + '<br />' +
+                                'Altitude: '           + position.coords.altitude              + '<br />' +
+                                'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                                'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                                'Heading: '            + position.coords.heading               + '<br />' +
+                                'Speed: '              + position.coords.speed                 + '<br />' +
+                                'Timestamp: '          +                                   position.timestamp          + '<br />';
+        }
+
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+        }
+
+          var geocoder;
+
+          if (navigator.geolocation) {
+>>>>>>> parent of 12b5b8b... Revert c068325..8885028
             navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
         } 
         //Get the latitude and the longitude;
@@ -122,10 +164,27 @@
           }
  parent of 8885028... Locatie
 
+                    }
+                }
+                //city data
+                alert(city.short_name + " " + city.long_name)
+
+
+                } else {
+                  alert("No results found");
+                }
+              } else {
+                alert("Geocoder failed due to: " + status);
+              }
+            });
+        }
+
+>>>>>>> parent of 12b5b8b... Revert c068325..8885028
         function takePicture(){
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
             destinationType: Camera.DestinationType.DATA_URL
         });
+<<<<<<< HEAD
 
         function onSuccess(imageData) {
             var image = document.getElementById('myImage');
@@ -136,6 +195,18 @@
             alert('Failed because: ' + message);
         }
 
+=======
+
+        function onSuccess(imageData) {
+            var image = document.getElementById('myImage');
+            image.src = "data:image/jpeg;base64," + imageData;
+        }
+
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+
+>>>>>>> parent of 12b5b8b... Revert c068325..8885028
         navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
             destinationType: Camera.DestinationType.FILE_URI });
 
@@ -148,6 +219,10 @@
             alert('Failed because: ' + message);
         }}
     </script>
+<<<<<<< HEAD
+=======
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+>>>>>>> parent of 12b5b8b... Revert c068325..8885028
     </head>
     <body onload="initialize()">
         <div data-role="page" id="pageone" class="app">
@@ -155,6 +230,7 @@
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
+<<<<<<< HEAD
             </div>
             <p id="geolocation">Finding geolocation...</p>
             <button onClick="takePicture();">klik hier</button>
@@ -172,7 +248,11 @@
 
             <div data-role="footer">
                 <p>Made by: Chrissy & Linda</p>
+=======
+>>>>>>> parent of 12b5b8b... Revert c068325..8885028
             </div>
+            <p id="geolocation">Finding geolocation...</p>
+            <button onClick="takePicture();">klik hier</button>
         </div>
     </body>
 </html>
