@@ -41,16 +41,16 @@
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
         <script type="text/javascript">
+        app.initialize();
             
 
         // Wait for Cordova to load
         //
-<<<<<<< HEAD
         //document.addEventListener("deviceready", onDeviceReady, false);
 
-// Google
-          var geocoder;
-=======
+        // Google
+        //var geocoder;
+
         document.addEventListener("deviceready", onDeviceReady, false);
 
         // Locatie
@@ -62,7 +62,6 @@
         function onSuccessLocation(position) {
 
             var geocoder;
->>>>>>> origin/master
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
@@ -143,33 +142,32 @@
         function onFail(message) {
             alert('Failed because: ' + message);
         }}
-        //app.initialize();
     </script>
     </head>
     <body onload="initialize()">
-        <div data-role="page" id="pageone">
-            <div data-role="header">
-                <h2>Dit is de eerste testpagina</h2>
-            </div>
-
-            <div data-role="main" class="ui-content">
-                <p>Voor de volgende pagina moet je op onderstaande knop klikken.</p>
-                <a href="#pagetwo">Pagina twee</a>
-            </div>
-
-            <div data-role="footer">
-                <p>Made by: Chrissy & Linda</p>
-            </div>
-        </div> 
-
-        <div data-role="page" id="pagetwo" class="app">
-            <h1>PhoneGap</h1>
+        <div data-role="page" id="pageone" class="app">
+            <h1>Coole app</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
             <p id="geolocation">Finding geolocation...</p>
             <button onClick="takePicture();">klik hier</button>
+            <a href="#pagetwo">Pagina twee</a>
+        </div> 
+
+        <div data-role="page" id="pagetwo">
+            <div data-role="header">
+                <h2>Dit is de eerste testpagina</h2>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <p>Als je deze pagina ziet dan mag je blij zijn.</p>
+            </div>
+
+            <div data-role="footer">
+                <p>Made by: Chrissy & Linda</p>
+            </div>
         </div>
     </body>
 </html>
