@@ -128,7 +128,7 @@
     <body onload="initialize()">
 
         <div data-role="page" id="main"><!-- class="app" -->
-            <img src="img/re-beauty.png" id="logo">
+            <img src="img/re-beauty.png" id="logo" width="200">
             <!--<div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
@@ -219,7 +219,7 @@
                 <li><a href="#brand-detail" class="ui-btn">Geurlain</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Gosh</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Giorgio Armani</a></li>
-                <li><a href="#brand-detail" class="ui-btn">Herome</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Her&ocirc;me</a></li>
                 <li><a href="#brand-detail" class="ui-btn">I love…</a></li>
                 <li><a href="#brand-detail" class="ui-btn">John Frieda</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Kardashian Beauty</a></li>
@@ -228,7 +228,7 @@
                 <li><a href="#brand-detail" class="ui-btn">KOH</a></li>
                 <li><a href="#brand-detail" class="ui-btn">L&#39;oreal</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Label M</a></li>
-                <li><a href="#brand-detail" class="ui-btn">Lancome</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Lanc&ocirc;me</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Mac</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Make&#45;up Studio</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Mavala</a></li>
@@ -239,7 +239,7 @@
                 <li><a href="#brand-detail" class="ui-btn">NYC</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Olaz</a></li>
                 <li><a href="#brand-detail" class="ui-btn">OPI</a></li>
-                <li><a href="#brand-detail" class="ui-btn">Pro-set</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Pro&#45;set</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Pupa</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Revlon</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Rimmel London</a></li>
@@ -296,9 +296,10 @@
                 <input type="number" placeholder="leeftijd">
                 <input type="text" placeholder="straat + huisnummer">
                 <input type="text" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" placeholder="1234 AA">
+                <button>Opslaan</button>
             </form>
 
-            <p>Mijn reviews:</p>
+            <p>Mijn reviews</p>
             <p>Hier komen de revieuws...</p>
 
             <p>Mijn punten</p>
@@ -322,15 +323,40 @@
                 <input type="text" placeholder="Productnaam">
                 <textarea placeholder="Details"></textarea>
                 <input type="number" step="0.1" min="1" max="10" placeholder="1 t/m 10">
+                <button></button>
             </form>
-        <div>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
+        </div>
 
         <div data-role="page" id="#category-detail">
             <p>Hier komt de informatie over de categorie.</p>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
         </div>
 
         <div data-role="page" id="#brand-detail">
             <p>Hier komt de informatie over het merk.</p>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
         </div>
     </body>
 </html>
