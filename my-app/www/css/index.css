@@ -59,10 +59,6 @@ body {
                                    /* offset horizontal: half of text area width */
 }
 
-#logo {
-    width: 200px;
-}
-
 ul {
     margin: 0;
     padding: 0;
