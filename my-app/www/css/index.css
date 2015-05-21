@@ -59,9 +59,24 @@ body {
                                    /* offset horizontal: half of text area width */
 }
 
+/* Re-Beauty styling */
+
 ul {
     margin: 0;
     padding: 0;
+}
+
+.menubalk li {
+    display: inline-block;
+    width: 33%
+}
+
+.star:before {
+    content: "";
+    display: inline-block;
+    background-image: url(img/star/png);
+    width: 21px;
+    height: 20px;
 }
 
 /* Landscape layout (with min-width) */
