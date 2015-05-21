@@ -127,29 +127,210 @@
     </head>
     <body onload="initialize()">
 
-        <div data-role="page" id="pageone" class="app">
-            <h1>Coole app</h1>
-            <div id="deviceready" class="blink">
+        <div data-role="page" id="main"><!-- class="app" -->
+            <img src="img/re-beauty.png" id="logo">
+            <!--<div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
             <p id="geolocation">Finding geolocation...</p>
             <button onClick="takePicture();">klik hier</button>
-            <a href="#pagetwo">Pagina twee</a>
+            <a href="#pagetwo">Pagina twee</a>-->
+
+            <p>Inloggen</p>
+            <a href="#home" class="ui-btn">Facebook</a>
+            <a href="#home" class="ui-btn">Instagram</a>
+            <a href="#home" class="ui-btn">Email login</a>
         </div> 
 
-        <div data-role="page" id="pagetwo">
-            <div data-role="header">
-                <h2>Dit is de eerste testpagina</h2>
-            </div>
+        <div data-role="page" id="home">
+            <a href="#">Hier komt de zoekbalk</a>
+            <a href="#categories" class="ui-btn">Categorie&euml;n</a> <!-- Nagellak, mascara etc. -->
+            <a href="#brands" class="ui-btn">Merken</a>
+            <a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
+            <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a>
 
-            <div data-role="main" class="ui-content">
-                <p>Als je deze pagina ziet dan mag je blij zijn.</p>
-            </div>
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li> <!-- Nieuwe review toevoegen en je kunt er een foto bij maken -->
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li> <!-- Hier zie je je gespaarde punten en kun je je reviews beheren -->
+                </ul>
+            </nav>
+        </div>
 
-            <div data-role="footer">
-                <p>Made by: Chrissy & Linda</p>
-            </div>
+        <div data-role="page" id="categories">
+            <a href="#">Hier komt de zoekbalk</a>
+            <ul>
+                <li><a href="#category-detail" class="ui-btn">Blush</a></li>
+                <li><a href="#category-detail" class="ui-btn">Bodylotions</a></li>
+                <li><a href="#category-detail" class="ui-btn">Douchecr&egrave;me</a></li>
+                <li><a href="#category-detail" class="ui-btn">Eyeliner</a></li>
+                <li><a href="#category-detail" class="ui-btn">Foundation</a></li>
+                <li><a href="#category-detail" class="ui-btn">Gezichtsverzorging</a></li>
+                <li><a href="#category-detail" class="ui-btn">Haarlak</a></li>
+                <li><a href="#category-detail" class="ui-btn">Haarmaskers</a></li>
+                <li><a href="#category-detail" class="ui-btn">Kunstnagels &amp; nepwimpers</a></li>
+                <li><a href="#category-detail" class="ui-btn">Lipgloss</a></li>
+                <li><a href="#category-detail" class="ui-btn">Lippenstift</a></li>
+                <li><a href="#category-detail" class="ui-btn">Mascara</a></li>
+                <li><a href="#category-detail" class="ui-btn">Nagellak</a></li>
+                <li><a href="#category-detail" class="ui-btn">Oogschaduw</a></li>
+                <li><a href="#category-detail" class="ui-btn">Reinigingsproducten</a></li>
+                <li><a href="#category-detail" class="ui-btn">Shampoo</a></li>
+                <li><a href="#category-detail" class="ui-btn">Haarstylingproducten</a></li>
+            </ul>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div data-role="page" id="brands">
+            <a href="#">Hier komt de zoekbalk</a>
+            <ul>
+                <li><a href="#brand-detail" class="ui-btn">Anastasia</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Artdeco</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Benefit</a></li>
+                <li><a href="#brand-detail" class="ui-btn">BeYu</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Biotherm</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Elizabeth Arden</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Bobbi Brown</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Bourjois</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Calvin Klein</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Catrice</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Chanel</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Clarins</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Clinique</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Collistar</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Deborah</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Dior</a></li>
+                <li><a href="#brand-detail" class="ui-btn">DKNY</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Dove</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Essence</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Essie</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Estee Lauder</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Eylure</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Garnier</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Geurlain</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Gosh</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Giorgio Armani</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Herome</a></li>
+                <li><a href="#brand-detail" class="ui-btn">I love…</a></li>
+                <li><a href="#brand-detail" class="ui-btn">John Frieda</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Kardashian Beauty</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Keune</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Kiehl&#39;s</a></li>
+                <li><a href="#brand-detail" class="ui-btn">KOH</a></li>
+                <li><a href="#brand-detail" class="ui-btn">L&#39;oreal</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Label M</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Lancome</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Mac</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Make&#45;up Studio</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Mavala</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Max Factor</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Maybelline</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Miss Sporty</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Nivea</a></li>
+                <li><a href="#brand-detail" class="ui-btn">NYC</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Olaz</a></li>
+                <li><a href="#brand-detail" class="ui-btn">OPI</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Pro-set</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Pupa</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Revlon</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Rimmel London</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Sally Hansen</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Schwarzkopf</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Shiseido</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Smashbox</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Syos</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Wella</a></li>
+            </ul>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div data-role="page" id="most-wanted">
+            <a href="" class="ui-btn">Eylure Super Full No. 070<span class="star">8.2</span></a>
+            <a href="" class="ui-btn">L'Oreal Paris Nude Magique<span class="star">7.5</span></a>
+            <a href="" class="ui-btn">Deborah Milano Mascara<span class="star">7.0</span></a>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div data-role="page" id="new-reviews">
+            <a href="" class="ui-btn">Balmain Texturizing Salt spray<span class="star">7.3</span></a>
+            <a href="" class="ui-btn">Estée Lauder Bronze Goddes<span class="star">8.0</span></a>
+            <a href="" class="ui-btn">Bourjois Nagellak<span class="star">6.8</span></a>
+            <a href="" class="ui-btn">MAC Lipgloss Limited<span class="star">5.7</span></a>
+            <a href="" class="ui-btn">Collistar Duo Bronzing<span class="star">7.4</span></a>
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div data-role="page" id="profile">
+            <form>
+                <input type="text" placeholder="naam">
+                <input type="number" placeholder="leeftijd">
+                <input type="text" placeholder="straat + huisnummer">
+                <input type="text" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" placeholder="1234 AA">
+            </form>
+
+            <p>Mijn reviews:</p>
+            <p>Hier komen de revieuws...</p>
+
+            <p>Mijn punten</p>
+            <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
+
+            <nav>
+                <ul class="menubalk">
+                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
+                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
+                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div data-role="page" id="new">
+            <h1>Maak een nieuwe review</h1>
+            <a href="">Fotootje toevoegen.</a>
+            <form>
+                <input type="text" placeholder="Merk">
+                <input type="text" placeholder="Categorie">
+                <input type="text" placeholder="Productnaam">
+                <textarea placeholder="Details"></textarea>
+                <input type="number" step="0.1" min="1" max="10" placeholder="1 t/m 10">
+            </form>
+        <div>
+
+        <div data-role="page" id="#category-detail">
+            <p>Hier komt de informatie over de categorie.</p>
+        </div>
+
+        <div data-role="page" id="#brand-detail">
+            <p>Hier komt de informatie over het merk.</p>
         </div>
     </body>
 </html>
