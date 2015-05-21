@@ -12,7 +12,7 @@
         <script type="text/javascript" src="js/index.js"></script>
 
         <!-- jQuery mobile -->
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" /> -->
         <script type="text/javascript" src="js/jquery.js"></script>
 
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
@@ -144,7 +144,8 @@
         </div> 
 
         <div data-role="page" id="home">
-            <a href="#">Hier komt de zoekbalk</a>
+            <img src="img/re-beauty.png" width="300"><br>
+            <input type="search" placeholder="zoeken...">
             <a href="#categories" class="ui-btn">Categorie&euml;n</a> <!-- Nagellak, mascara etc. -->
             <a href="#brands" class="ui-btn">Merken</a>
             <a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
@@ -152,15 +153,16 @@
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li> <!-- Nieuwe review toevoegen en je kunt er een foto bij maken -->
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li> <!-- Hier zie je je gespaarde punten en kun je je reviews beheren -->
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li> <!-- Nieuwe review toevoegen en je kunt er een foto bij maken -->
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li> <!-- Hier zie je je gespaarde punten en kun je je reviews beheren -->
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="categories">
-            <a href="#">Hier komt de zoekbalk</a>
+            <h1>Categorie&euml;n</h1>
+            <input type="search" placeholder="zoeken...">
             <ul>
                 <li><a href="#category-detail" class="ui-btn">Blush</a></li>
                 <li><a href="#category-detail" class="ui-btn">Bodylotions</a></li>
@@ -183,15 +185,16 @@
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="brands">
-            <a href="#">Hier komt de zoekbalk</a>
+            <h1>Merken</h1>
+            <input type="search" placeholder="zoeken...">
             <ul>
                 <li><a href="#brand-detail" class="ui-btn">Anastasia</a></li>
                 <li><a href="#brand-detail" class="ui-btn">Artdeco</a></li>
@@ -253,70 +256,73 @@
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="most-wanted">
-            <a href="#review-detail">Eylure Super Full No. 070<span class="star">8.2</span></a>
-            <a href="#review-detail">L'Oreal Paris Nude Magique<span class="star">7.5</span></a>
-            <a href="#review-detail">Deborah Milano Mascara<span class="star">7.0</span></a>
+            <h1>Meest gewaardeerd</h1>
+            <p><a href="#review-detail">Eylure Super Full No. 070</a><span class="star"><img src="img/star.png">8.2</span></p>
+            <p><a href="#review-detail">L'Oreal Paris Nude Magique</a><span class="star"><img src="img/star.png">7.5</span></p>
+            <p><a href="#review-detail">Deborah Milano Mascara</a><span class="star"><img src="img/star.png">7.0</span></p>
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="new-reviews">
-            <a href="#review-detail">Balmain Texturizing Salt spray<span class="star">7.3</span></a>
-            <a href="#review-detail">Estée Lauder Bronze Goddes<span class="star">8.0</span></a>
-            <a href="#review-detail">Bourjois Nagellak<span class="star">6.8</span></a>
-            <a href="#review-detail">MAC Lipgloss Limited<span class="star">5.7</span></a>
-            <a href="#review-detail">Collistar Duo Bronzing<span class="star">7.4</span></a>
+            <h1>Nieuwste reviews</h1>
+            <p><a href="#review-detail">Balmain Texturizing Salt spray</a><span class="star"><img src="img/star.png">7.3</span></p>
+            <p><a href="#review-detail">Estée Lauder Bronze Goddes</a><span class="star"><img src="img/star.png">8.0</span></p>
+            <p><a href="#review-detail">Bourjois Nagellak</a><span class="star"><img src="img/star.png">6.8</span></p>
+            <p><a href="#review-detail">MAC Lipgloss Limited</a><span class="star"><img src="img/star.png">5.7</span></p>
+            <p><a href="#review-detail">Collistar Duo Bronzing</a><span class="star"><img src="img/star.png">7.4</span></p>
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="profile">
+            <h1>Mijn profiel</h1>
             <form>
                 <input type="text" placeholder="naam">
                 <input type="number" placeholder="leeftijd">
                 <input type="text" placeholder="straat + huisnummer">
-                <input type="text" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" placeholder="1234 AA">
+                <input type="text" pattern="[0-9]{4}[a-zA-Z]{2}" placeholder="1234 AA">
                 <button>Opslaan</button>
             </form>
 
-            <p>Mijn reviews</p>
-            <p>Hier komen de revieuws...</p>
+            <h3>Mijn reviews</h3>
+            <p>Hier komen de reviews...</p>
 
-            <p>Mijn punten</p>
+            <h3>Mijn punten</h3>
             <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="new">
             <h1>Maak een nieuwe review</h1>
-            <a href="">Fotootje toevoegen.</a>
+            <button onClick="takePicture();">Foto</button>
             <form>
                 <input type="text" placeholder="Merk">
                 <input type="text" placeholder="Categorie">
@@ -328,45 +334,48 @@
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="category-detail">
-            <p>Hier komt de informatie over de categorie.</p>
+            <h1>Categorie-naam</h1>
+            <p>Hier komt de informatie over deze categorie. Feedback is welkom</p>
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="brand-detail">
-            <p>Hier komt de informatie over het merk.</p>
+            <h1>Merk-naam</h1>
+            <p>Hier komt de informatie over dit merk. Je kunt ook extra filters gebruiken op de producten.</p>
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>
 
         <div data-role="page" id="review-detail">
-            <p>Hier komen de details van de revieuws</p>
+            <h1>Review detail</h1>
+            <p>Hier komen de details van deze reviews. Welk product het precies is, het commentaar en het cijfer.</p>
 
             <nav>
                 <ul class="menubalk">
-                    <li><a href="#new" class="ui-btn">Toevoegen</a></li>
-                    <li><a href="#home" class="ui-btn">Overzicht</a></li>
-                    <li><a href="#profile" class="ui-btn">Profiel</a></li>
+                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
+                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
+                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
                 </ul>
             </nav>
         </div>

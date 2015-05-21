@@ -68,16 +68,29 @@ ul {
 
 .menubalk li {
     display: inline-block;
-    width: 33%
+    width: 32%;
+    margin-right: 3px;
 }
 
-.star:before {
+.menubalk li:last-of-type {
+    margin-right: 0; 
+}
+
+.star {
+    float: right;
+}
+
+.star img {
+    margin-right: 5px;
+}
+
+/*.star:before {
     content: "";
     display: inline-block;
     background-image: url(img/star/png);
     width: 21px;
     height: 20px;
-}
+}*/
 
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
