@@ -74,7 +74,7 @@ ul {
 .menu li {
     display: inline-block;
     width: 32%;
-    margin-right: 2px;
+    margin-right: 0px;
 }
 
 .menu li:last-of-type {
