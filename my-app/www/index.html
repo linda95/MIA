@@ -128,7 +128,6 @@
     <body onload="initialize()">
 
         <div data-role="page" id="main"><!-- class="app" -->
-            <img src="img/re-beauty.png" width="300">
             <!--<div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
@@ -137,7 +136,8 @@
             <button onClick="takePicture();">klik hier</button>
             <a href="#pagetwo">Pagina twee</a>-->
 
-            <p>Inloggen</p>
+            <h1>Inloggen</h1>
+            <img src="img/re-beauty.png" width="300">
             <a href="#home" class="ui-btn">Facebook</a>
             <a href="#home" class="ui-btn">Instagram</a>
             <a href="#home" class="ui-btn">Email login</a>
@@ -152,7 +152,7 @@
             <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li> <!-- Nieuwe review toevoegen en je kunt er een foto bij maken -->
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li> <!-- Hier zie je je gespaarde punten en kun je je reviews beheren -->
@@ -184,7 +184,7 @@
             </ul>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -255,7 +255,7 @@
             </ul>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -270,7 +270,7 @@
             <p><a href="#review-detail">Deborah Milano Mascara</a><span class="star"><img src="img/star.png">7.0</span></p>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -287,7 +287,7 @@
             <p><a href="#review-detail">Collistar Duo Bronzing</a><span class="star"><img src="img/star.png">7.4</span></p>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -305,14 +305,15 @@
                 <button>Opslaan</button>
             </form>
 
-            <h3>Mijn reviews</h3>
-            <p>Hier komen de reviews...</p>
+            <h3>Mijn reviews (1)</h3>
+            <h3>Essence Nagellak roze</h3>
+            <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>
 
             <h3>Mijn punten</h3>
             <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -321,8 +322,9 @@
         </div>
 
         <div data-role="page" id="new">
-            <h1>Maak een nieuwe review</h1>
-            <button onClick="takePicture();">Foto</button>
+            <h1>Nieuwe review</h1>
+            <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
+            <button onClick="takePicture();" class="picture"><img src="img/camera.png"></button>
             <form>
                 <input type="text" placeholder="Merk">
                 <input type="text" placeholder="Categorie">
@@ -333,7 +335,7 @@
             </form>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -346,7 +348,7 @@
             <p>Hier komt de informatie over deze categorie. Feedback is welkom</p>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -359,7 +361,7 @@
             <p>Hier komt de informatie over dit merk. Je kunt ook extra filters gebruiken op de producten.</p>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
@@ -369,10 +371,11 @@
 
         <div data-role="page" id="review-detail">
             <h1>Review detail</h1>
-            <p>Hier komen de details van deze reviews. Welk product het precies is, het commentaar en het cijfer.</p>
+            <h3>Essence Nagellak roze</h3>
+            <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>
 
             <nav>
-                <ul class="menubalk">
+                <ul class="menu">
                     <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
                     <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
                     <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>

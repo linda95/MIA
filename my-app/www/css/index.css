@@ -36,12 +36,12 @@ body {
         color-stop(0.51, #E4E4E4)
     );
     background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    /*font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;*/
     font-size:12px;
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    /*text-transform:uppercase;*/
     width:100%;
 }
 
@@ -66,13 +66,18 @@ ul {
     padding: 0;
 }
 
-.menubalk li {
+/*.menu {
+    position: absolute;
+    bottom: 0;
+}*/
+
+.menu li {
     display: inline-block;
     width: 32%;
     margin-right: 3px;
 }
 
-.menubalk li:last-of-type {
+.menu li:last-of-type {
     margin-right: 0; 
 }
 
@@ -82,6 +87,10 @@ ul {
 
 .star img {
     margin-right: 5px;
+}
+
+.picture {
+    width: 50px;
 }
 
 /*.star:before {
@@ -109,6 +118,9 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+    background-color: #E91E63;
+    color: white;
+    /*text-transform: uppercase;*/
 }
 
 .event {
