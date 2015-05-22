@@ -73,8 +73,9 @@ ul {
 
 .menu li {
     display: inline-block;
-    width: 30%;
-    margin-right: 0px;
+    /*width: 32%;
+    margin-right: 3px;*/
+    width: 103px;
 }
 
 .menu li:last-of-type {
