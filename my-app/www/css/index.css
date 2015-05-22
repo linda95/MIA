@@ -74,7 +74,7 @@ ul {
 .menu li {
     display: inline-block;
     width: 32%;
-    margin-right: 3px;
+    margin-right: 2px;
 }
 
 .menu li:last-of-type {
@@ -91,6 +91,15 @@ ul {
 
 .picture {
     width: 50px;
+}
+
+.content {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+a.ui-btn {
+    color: #F06292;
 }
 
 /*.star:before {

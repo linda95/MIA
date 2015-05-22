@@ -74,7 +74,7 @@ div.ui-controlgroup-label {
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn,
 label.ui-btn {
-	font-weight: bold;
+	/*font-weight: bold;*/
 	text-transform: uppercase;
 	border-width: 1px;
 	border-style: solid;
