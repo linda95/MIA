@@ -120,6 +120,10 @@
         function onFail(message) {
             alert('Failed because: ' + message);
         }}
+
+        $(function(){
+            $(".incMenu").load("inc/menu.html");
+        });
         
         app.initialize();
         </script>
@@ -151,13 +155,7 @@
             <a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
             <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li> <!-- Nieuwe review toevoegen en je kunt er een foto bij maken -->
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li> <!-- Hier zie je je gespaarde punten en kun je je reviews beheren -->
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="categories">
@@ -183,13 +181,7 @@
                 <li><a href="#category-detail" class="ui-btn">Haarstylingproducten</a></li>
             </ul>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="brands">
@@ -254,49 +246,31 @@
                 <li><a href="#brand-detail" class="ui-btn">Wella</a></li>
             </ul>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="most-wanted">
             <h1>Meest gewaardeerd</h1>
             <div class="content">
                 <p><a href="#review-detail">Eylure Super Full No. 070</a><span class="star"><img src="img/star.png">8.2</span></p>
-                <p><a href="#review-detail">L'Oreal Paris Nude Magique</a><span class="star"><img src="img/star.png">7.5</span></p>
+                <p><a href="#review-detail">L&#39;Oreal Paris Nude Magique</a><span class="star"><img src="img/star.png">7.5</span></p>
                 <p><a href="#review-detail">Deborah Milano Mascara</a><span class="star"><img src="img/star.png">7.0</span></p>
             </div>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="new-reviews">
             <h1>Nieuwste reviews</h1>
             <div class="content">
                 <p><a href="#review-detail">Balmain Texturizing Salt spray</a><span class="star"><img src="img/star.png">7.3</span></p>
-                <p><a href="#review-detail">Estée Lauder Bronze Goddes</a><span class="star"><img src="img/star.png">8.0</span></p>
+                <p><a href="#review-detail">Est&eacute;e Lauder Bronze Goddes</a><span class="star"><img src="img/star.png">8.0</span></p>
                 <p><a href="#review-detail">Bourjois Nagellak</a><span class="star"><img src="img/star.png">6.8</span></p>
                 <p><a href="#review-detail">MAC Lipgloss Limited</a><span class="star"><img src="img/star.png">5.7</span></p>
                 <p><a href="#review-detail">Collistar Duo Bronzing</a><span class="star"><img src="img/star.png">7.4</span></p>
             </div>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="profile">
@@ -318,13 +292,7 @@
                 <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
             </div>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="new">
@@ -338,32 +306,20 @@
                 <input type="text" placeholder="Categorie">
                 <input type="text" placeholder="Productnaam">
                 <textarea placeholder="Details"></textarea>
-                <input type="number" step="0.1" min="1" max="10" placeholder="1 t/m 10">
+                <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)">
                 <button>Opslaan</button>
             </form>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="category-detail">
             <h1>Categorie-naam</h1>
             <div class="content">
-                <p>Hier komt de informatie over deze categorie. Feedback is welkom</p>
+                <p>Hier komt de informatie over deze categorie.</p>
             </div>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="brand-detail">
@@ -372,13 +328,7 @@
                 <p>Hier komt de informatie over dit merk. Je kunt ook extra filters gebruiken op de producten.</p>
             </div>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
 
         <div data-role="page" id="review-detail">
@@ -388,13 +338,7 @@
                 <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>
             </div>
 
-            <nav>
-                <ul class="menu">
-                    <li><a href="#new" class="ui-btn"><img src="img/plus.png"></a></li>
-                    <li><a href="#home" class="ui-btn"><img src="img/home.png"></a></li>
-                    <li><a href="#profile" class="ui-btn"><img src="img/profile.png"></a></li>
-                </ul>
-            </nav>
+            <nav class="incMenu"></nav>
         </div>
     </body>
 </html>
