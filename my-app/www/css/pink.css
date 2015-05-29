@@ -266,7 +266,7 @@ html .ui-panel-page-container-a {
 html .ui-bar-a a,
 html .ui-body-a a,
 html body .ui-group-theme-a a {
-	color: #E91E63; /*{a-link-color}*/
+	color: #E91E63 !important; /*{a-link-color}*/
 	font-weight: bold;
 }
 .ui-page-theme-a a:visited,
@@ -302,7 +302,7 @@ html head + body .ui-btn.ui-btn-a:visited {
 	background-color: #F06292; /*{a-bup-background-color}*/
 	border-color: #dddddd; /*{a-bup-border}*/
 	/*color: #333333;*/
-	color: white;
+	color: white !important;
 	/* text-shadow: 0 1px 0 #f3f3f3; /*{a-bup-shadow-x}*/  /*{a-bup-shadow-y}*/  /*{a-bup-shadow-radius}*/  /*{a-bup-shadow-color}*/
 }
 /* Button hover */
