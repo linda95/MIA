@@ -262,6 +262,16 @@ html .ui-panel-page-container-a {
 	border-style: solid;
 }
 /* Links */
+/* Button back */
+.back-button {
+    text-decoration: none;
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    width: auto;
+}
+
+/* A link */
 .ui-page-theme-a a,
 html .ui-bar-a a,
 html .ui-body-a a,

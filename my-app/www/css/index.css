@@ -71,7 +71,7 @@ ul {
     bottom: -10px;
     left: 0;
     width: 100%;
-    background-color: #E4E4E4;
+    background-color: #f9f9f9;
 }
 
 .menu li {
@@ -96,7 +96,7 @@ ul {
 /*.star:before {
     content: "";
     display: inline-block;
-    background-image: url(img/star/png);
+    background-image: url(img/star.png);
     width: 21px;
     height: 20px;
 }*/
@@ -112,15 +112,6 @@ ul {
 
 a.ui-btn {
     color: #F06292;
-}
-
-.back-button {
-    color: white !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    line-height: 22px;
 }
 
 /* Landscape layout (with min-width) */
