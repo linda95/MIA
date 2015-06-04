@@ -308,7 +308,7 @@ body.ui-mobile-viewport,div.ui-mobile-viewport{overflow-x:hidden}
 .ui-content{border-width:0;overflow:visible;overflow-x:hidden;padding:1em}
 .ui-corner-all>.ui-header:first-child,.ui-corner-all>.ui-content:first-child,.ui-corner-all>.ui-footer:first-child{-webkit-border-top-left-radius:inherit;border-top-left-radius:inherit;-webkit-border-top-right-radius:inherit;border-top-right-radius:inherit}
 .ui-corner-all>.ui-header:last-child,.ui-corner-all>.ui-content:last-child,.ui-corner-all>.ui-footer:last-child{-webkit-border-bottom-left-radius:inherit;border-bottom-left-radius:inherit;-webkit-border-bottom-right-radius:inherit;border-bottom-right-radius:inherit}
-.ui-btn{font-size:16px;margin:.5em 0;padding:.7em 1em;display:block;position:relative;text-align:center;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.ui-btn{font-size:16px;/*margin:.5em 0;*/padding:.7em 1em;display:block;position:relative;text-align:center;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .ui-btn-icon-notext,.ui-header button.ui-btn.ui-btn-icon-notext,.ui-footer button.ui-btn.ui-btn-icon-notext{padding:0;width:1.75em;height:1.75em;text-indent:-9999px;white-space:nowrap!important}
 .ui-mini{font-size:12.5px}
 .ui-mini .ui-btn{font-size:inherit}

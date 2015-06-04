@@ -243,7 +243,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
 	background-color: #f9f9f9; /*{a-page-background-color}*/
 	border-color: #bbbbbb; /*{a-page-border}*/
 	color: #333333; /*{a-page-color}*/
-	text-shadow: 0 1px 0 #f3f3f3; /*{a-page-shadow-x}*/  /*{a-page-shadow-y}*/  /*{a-page-shadow-radius}*/  /*{a-page-shadow-color}*/
+	/*text-shadow: 0 1px 0 #f3f3f3;*/ /*{a-page-shadow-x}*/  /*{a-page-shadow-y}*/  /*{a-page-shadow-radius}*/  /*{a-page-shadow-color}*/
 }
 /* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-a,
@@ -277,7 +277,7 @@ html .ui-bar-a a,
 html .ui-body-a a,
 html body .ui-group-theme-a a {
 	color: #E91E63 !important; /*{a-link-color}*/
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 .ui-page-theme-a a:visited,
 html .ui-bar-a a:visited,
