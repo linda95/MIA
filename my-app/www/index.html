@@ -24,6 +24,10 @@
         <link rel="stylesheet" type="text/css" href="css/pink.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css" />
         
+        <!-- Autocomplete files? -->
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
         <script type="text/javascript" charset="utf-8">
         // Wait for Cordova to load
         //
@@ -295,6 +299,70 @@
         }
     });
 });
+
+$(function() {
+    var availableTags = [
+        "Anastasia",
+        "Artdeco",
+        "Benefit",
+        "BeYu",
+        "Biotherm",
+        "Elizabeth Arden",
+        "Bobbi Brown",
+        "Bourjois",
+        "Calvin Klein",
+        "Catrice",
+        "Chanel",
+        "Clarins",
+        "Clinique",
+        "Deborah",
+        "Dior",
+        "DKNY",
+        "Dove",
+        "Essence",
+        "Essie",
+        "Estee Lauder",
+        "Eylure",
+        "Garnier",
+        "Geurlain",
+        "Gosh",
+        "Giorgio Armani",
+        "Herome",
+        "I love…",
+        "John Frieda",
+        "Kardashian Beauty",
+        "Keune",
+        "Kiehl’s",
+        "KOH",
+        "L’oreal",
+        "Label M",
+        "Lancome",
+        "Mac",
+        "Make-up Studio",
+        "Mavala",
+        "Max Factor",
+        "Maybelline",
+        "Miss Sporty",
+        "Nivea",
+        "NYC",
+        "Olaz",
+        "OPI",
+        "Pro-set",
+        "Pupa",
+        "Revlon",
+        "Rimmel London",
+        "Rituals",
+        "Sally Hansen",
+        "Schwarzkopf",
+        "Shiseido",
+        "Smashbox",
+        "Syos",
+        "Wella"
+    ];
+    $("#merknaam").autocomplete({
+        source: availableTags
+    });
+});
 </script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     </head>
@@ -323,7 +391,7 @@
 
         <div data-role="page" id="home">
             <img src="img/re-beauty.png" width="300"><br>
-            <ul id="homeReviews" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
+            <ul id="homeReviews" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" data-role="listview" -->
             <!--<a href="#categories" class="ui-btn">Categorie&euml;n</a> --> <!-- Nagellak, mascara etc. -->
             <!--<a href="#brands" class="ui-btn">Merken</a> -->
             <!--<a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> --> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->

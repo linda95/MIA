@@ -171,3 +171,8 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.ui-menu-item {
+    background-color: rgba(252, 228, 236, 1);
+    padding: 5px;
+}
