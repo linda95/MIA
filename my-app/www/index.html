@@ -412,6 +412,27 @@ $(function() {
         source: availableTags
     });
 });
+
+    /*
+    //Get photo
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    // 
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+
+    //Capture foto
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+    }*/
 </script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     </head>
@@ -430,9 +451,9 @@ $(function() {
             <img src="img/re-beauty.png" width="300">
             <div class="content">
                 <p>Re-beauty is een onafhankelijk review-app voor beautyproducten. Wij verifiëren of reviews door echte gebruikers geplaatst zijn en helpen hiermee het beste beautyproduct te vinden. Door zelf reviews te plaatsen kun je ook nog eens sparen voor korting op nieuwe artikelen.</p>
+                <!--<button onclick="capturePhoto();">Capture Photo</button> <br>
+                <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>-->
             </div>
-            <!--<a href="#home" class="ui-btn">Facebook</a>
-            <a href="#home" class="ui-btn">Instagram</a>-->
             <a href="#login-email" class="ui-btn">Email login</a>
             <a href="#home" class="ui-btn">Reviews bekijken</a>
             <a href="#profile" class="ui-btn">Account aanmaken</a>
@@ -440,7 +461,7 @@ $(function() {
 
         <div data-role="page" id="home">
             <img src="img/re-beauty.png" width="300"><br>
-            <ul id="homeReviews" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" data-role="listview" -->
+            <ul id="homeReviews" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
             <!--<a href="#categories" class="ui-btn">Categorie&euml;n</a> --> <!-- Nagellak, mascara etc. -->
             <!--<a href="#brands" class="ui-btn">Merken</a> -->
             <!--<a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> --> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
@@ -619,7 +640,7 @@ $(function() {
                 <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
                 <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
                 <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">
-                <button onClick="takePicture();" class="picture"><img src="img/camera.png"></button>
+                <!--<button onClick="takePicture();" class="picture"><img src="img/camera.png"></button>-->
                 <button>Opslaan</button>
             </form>
 
