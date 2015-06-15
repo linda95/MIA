@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Re-Beauty</title>
+        <!--<script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>-->
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <!-- jQuery mobile -->
+        <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" /> -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+
+        <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+        <link rel="stylesheet" href="css/jquery.mobile.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <!-- jQuery mobile theme -->
+        <link rel="stylesheet" type="text/css" href="css/pink.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css" />
+        
+        <!-- Autocomplete files? -->
+        <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+        // onSuccess Geolocation
+        //
+        function onSuccess(position) {
+            var element = document.getElementById('geolocation');
+            element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                                'Longitude: '          + position.coords.longitude             + '<br />' +
+                                'Altitude: '           + position.coords.altitude              + '<br />' +
+                                'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                                'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                                'Heading: '            + position.coords.heading               + '<br />' +
+                                'Speed: '              + position.coords.speed                 + '<br />' +
+                                'Timestamp: '          +                                   position.timestamp          + '<br />';
+        }
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+        }
+
+        var geocoder;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+        } 
+        
+        //Get the latitude and the longitude;
+        function successFunction(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            codeLatLng(lat, lng)
+        }
+        function errorFunction(){
+            alert("Geocoder failed");
+        }
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+        }
+
+        function codeLatLng(lat, lng) {
+            var latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({'latLng': latlng}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results)
+            if (results[1]) {
+                //formatted address
+                alert(results[0].formatted_address)
+                //find country name
+            for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+                //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                    //this is the object you are looking for
+                    city= results[0].address_components[i];
+                    break;
+                }
+            }
+        }
+        //city data
+        alert(city.short_name + " " + city.long_name)
+        } else {
+            alert("No results found");
+        }
+        } else {
+            alert("Geocoder failed due to: " + status);
+        }
+        });
+        }
+
+        function takePicture(){
+            alert(navigator);
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL
+        });
+        function onSuccess(imageData) {
+            var image = document.getElementById('myImage');
+            image.src = "data:image/jpeg;base64," + imageData;
+        }
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI });
+        function onSuccess(imageURI) {
+            var image = document.getElementById('myImage');
+            image.src = imageURI;
+        }
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }}
+
+        $(function(){
+            $(".incMenu").load("inc/menu.html");
+        });
+
+        /*$('#theDiv').load(
+              "getDatabaseData.php",
+              function() {
+                    alert('Got the data.');
+              }
+        );*/
+        
+        app.initialize();
+        </script>
+            <script>
+    $(document).ready(function() {
+        $('#reviewplaatsen').submit(function(){
+            $('.error').hide();
+            var hasError = false; 
+            var gebruikers_id = '0000000001';
+            var merknaam = $("#merknaam").val();
+            var productnaam = $("#productnaam").val();
+            var categorie = $("#categorie").val();
+            var waardering = $('#waardering').val();
+            var beschrijving = $('#beschrijving').val();
+
+            if(hasError == false) {
+                $(this).hide();
+                $.ajax({
+                    type:'POST',
+                    url: 'http://i270922.iris.fhict.nl/postreviews.php',
+                    data : ({ 
+                        review_id:'',
+                        gebruikers_id:gebruikers_id,
+                        merknaam:merknaam,
+                        productnaam:productnaam,
+                        categorie:categorie,
+                        waardering:waardering,
+                        datum:'',
+                        beschrijving:beschrijving,
+                        foto_product:'',
+                        foto_bon:''
+                    }),
+                    success: function(){
+                        // alert('worked');
+                    },
+                    error :function(){
+                        //alert('nope');
+                    },
+                    complete : function(){
+                        //alert('Thank you for your registration you will receive the email with further information soon');
+                        //window.location='index.html#waiting'; 
+                    }
+                });
+            }
+            return false;
+        });
+
+    $('#profielplaatsen').submit(function(){
+            $('.error').hide();
+            var hasError = false; 
+            var gebruiker_id = '';
+            var naam = $("#naam").val();
+            var leeftijd = $("#leeftijd").val();
+            var straat = $("#straat").val();
+            var postcode = $("#postcode").val();
+            var punten = ''
+            var profielfoto = ''
+
+            if(hasError == false) {
+                $(this).hide();
+                $.ajax({
+                    type:'POST',
+                    url: 'http://i270922.iris.fhict.nl/postprofiel.php',
+                    data : ({ 
+                        gebruiker_id:gebruiker_id,
+                        naam:naam,
+                        leeftijd:leeftijd,
+                        straat:straat,
+                        postcode:postcode,
+                        punten:punten,
+                        profielfoto:profielfoto
+                    }),
+                    success: function(){
+                        // alert('worked');
+                    },
+                    error :function(){
+                        //alert('nope');
+                    },
+                    complete : function(){
+                        //alert('Thank you for your registration you will receive the email with further information soon');
+                        //window.location='index.html#waiting'; 
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(document).bind('deviceready', function(){
+            //Phonegap ready
+            onDeviceReady();
+        });
+
+    // Meest gewaardeerd reviews inladen
+    var output = $('#output');
+
+    $.ajax({
+        url: 'http://i270922.iris.fhict.nl/getreviews.php',
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        timeout: 5000,
+        success: function(data, status){
+            $.each(data, function(i,item){ 
+                var landmark = '<h1>'+item.merknaam+'</h1>'
+                + '<p>'+item.productnaam+'<br>'
+                + '<p>'+item.waardering+'<br>'
+                + '<p>'+item.datum+'<br>'
+                + item.beschrijving+'</p>';
+            
+                output.append(landmark);
+            });
+        },
+        error: function(){
+           output.text('There was an error loading the data.');
+        }
+    });
+
+    $(document).on('pageinit', '#login-email', function(){ 
+    $(document).on('click', '#submit', function() { // catch the form's submit event
+        if($('#username').val().length > 0 && $('#password').val().length > 0){
+            // Send data to server through the Ajax call
+            // action is functionality we want to call and outputJSON is our data
+                $.ajax({url: 'http://i270922.iris.fhict.nl/check.php',
+                    data: {action : 'login', formData : $('#check-user').serialize()},
+                    type: 'get',                  
+                    async: 'true',
+                    dataType: 'jsonp',
+                    beforeSend: function() {
+                        // This callback function will trigger before data is sent
+                        $.mobile.loading('show', {theme:"a", text:"Please wait...", textonly:true, textVisible: true}); // This will show ajax spinner
+                    },
+                    complete: function() {
+                        // This callback function will trigger on data sent/received complete
+                        $.mobile.loading('hide'); // This will hide ajax spinner
+                    },
+                    success: function (result) {
+                        if(result.status) {
+                            user.name =  result.massage;
+                            $.mobile.changePage("#home");                        
+                        } else {
+                            alert('Onjuiste inloggegevens!');
+                            //alert(result.status);
+                            //alert(result.massage);
+
+                        }
+                    },
+                    error: function (request,error) {
+                        // This callback function will trigger on unsuccessful action               
+                        alert('Network error has occurred please try again!');
+                    }
+                });                  
+        } else {
+            alert('Please fill all necessary fields!');
+        }          
+        return false; // cancel original event to prevent form submitting
+    });   
+});
+ 
+$(document).on('pagebeforeshow', '#home', function(){ 
+    $.mobile.activePage.find('.ui-content').html('Welcome ' + user.name)
+});
+ 
+var user = {
+    name : null
+}
+
+    // Merklijst inladen bij merken
+    var merklijst = $('#merkInladen');
+
+    $.ajax({
+        url: 'http://i270922.iris.fhict.nl/getbrands.php',
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        timeout: 5000,
+        success: function(data, status){
+            $.each(data, function(i,item){ 
+                var brand = '<li>'+item.merknaam+'</li>';
+            
+                merklijst.append(brand);
+            });
+        },
+        error: function(){
+           merklijst.text('There was an error loading the data.');
+        }
+    });
+
+    // Homepagina reviews inladen
+    var reviews = $('#homeReviews');
+
+    $.ajax({
+        url: 'http://i270922.iris.fhict.nl/getreviews.php',
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        timeout: 5000,
+        success: function(data, status){
+            $.each(data, function(i,item){ 
+                var reviewophalen = '<li><h2>'+item.merknaam+'</h2>'
+                +item.productnaam
+                + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                +item.datum+'<br>'
+                + item.beschrijving+'</li>';
+            
+                reviews.append(reviewophalen);
+            });
+        },
+        error: function(){
+           reviews.text('There was an error loading the data.');
+        }
+    });
+});
+
+$(function() {
+    var availableTags = [
+        "Anastasia",
+        "Artdeco",
+        "Benefit",
+        "BeYu",
+        "Biotherm",
+        "Elizabeth Arden",
+        "Bobbi Brown",
+        "Bourjois",
+        "Calvin Klein",
+        "Catrice",
+        "Chanel",
+        "Clarins",
+        "Clinique",
+        "Deborah",
+        "Dior",
+        "DKNY",
+        "Dove",
+        "Essence",
+        "Essie",
+        "Estee Lauder",
+        "Eylure",
+        "Garnier",
+        "Geurlain",
+        "Gosh",
+        "Giorgio Armani",
+        "Herome",
+        "I love…",
+        "John Frieda",
+        "Kardashian Beauty",
+        "Keune",
+        "Kiehl’s",
+        "KOH",
+        "L’oreal",
+        "Label M",
+        "Lancome",
+        "Mac",
+        "Make-up Studio",
+        "Mavala",
+        "Max Factor",
+        "Maybelline",
+        "Miss Sporty",
+        "Nivea",
+        "NYC",
+        "Olaz",
+        "OPI",
+        "Pro-set",
+        "Pupa",
+        "Revlon",
+        "Rimmel London",
+        "Rituals",
+        "Sally Hansen",
+        "Schwarzkopf",
+        "Shiseido",
+        "Smashbox",
+        "Syos",
+        "Wella"
+    ];
+    $("#merknaam").autocomplete({
+        source: availableTags
+    });
+});
+
+    /*
+    //Get photo
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    // 
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+
+    //Capture foto
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+    }*/
+</script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    </head>
+    <body onload="initialize()">
+
+        <div data-role="page" id="main"><!-- class="app" -->
+            <!--<div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <p id="geolocation">Finding geolocation...</p>
+            <button onClick="takePicture();">klik hier</button>
+            <a href="#pagetwo">Pagina twee</a>-->
+
+            <h1>Inloggen</h1>
+            <img src="img/re-beauty.png" width="300">
+            <div class="content">
+                <p>Re-beauty is een onafhankelijk review-app voor beautyproducten. Wij verifiëren of reviews door echte gebruikers geplaatst zijn en helpen hiermee het beste beautyproduct te vinden. Door zelf reviews te plaatsen kun je ook nog eens sparen voor korting op nieuwe artikelen.</p>
+                <!--<button onclick="capturePhoto();">Capture Photo</button> <br>
+                <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>-->
+            </div>
+            <a href="#login-email" class="ui-btn">Email login</a>
+            <a href="#home" class="ui-btn">Reviews bekijken</a>
+            <a href="#profile" class="ui-btn">Account aanmaken</a>
+        </div>
+
+        <div data-role="page" id="home">
+            <img src="img/re-beauty.png" width="300"><br>
+            <ul id="homeReviews" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
+            <!--<a href="#categories" class="ui-btn">Categorie&euml;n</a> --> <!-- Nagellak, mascara etc. -->
+            <!--<a href="#brands" class="ui-btn">Merken</a> -->
+            <!--<a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> --> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
+            <!-- <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a> -->
+
+            <nav class="incMenu"></nav>
+        </div>
+
+        <!--<div data-role="page" id="categories">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Categorie&euml;n</h1>
+            <ul data-filter="true" data-filter-placeholder="Zoek categorie...">
+                <li><a href="#category-detail" class="ui-btn">Blush</a></li>
+                <li><a href="#category-detail" class="ui-btn">Bodylotions</a></li>
+                <li><a href="#category-detail" class="ui-btn">Douchecr&egrave;me</a></li>
+                <li><a href="#category-detail" class="ui-btn">Eyeliner</a></li>
+                <li><a href="#category-detail" class="ui-btn">Foundation</a></li>
+                <li><a href="#category-detail" class="ui-btn">Gezichtsverzorging</a></li>
+                <li><a href="#category-detail" class="ui-btn">Haarlak</a></li>
+                <li><a href="#category-detail" class="ui-btn">Haarmaskers</a></li>
+                <li><a href="#category-detail" class="ui-btn">Kunstnagels &amp; nepwimpers</a></li>
+                <li><a href="#category-detail" class="ui-btn">Lipgloss</a></li>
+                <li><a href="#category-detail" class="ui-btn">Lippenstift</a></li>
+                <li><a href="#category-detail" class="ui-btn">Mascara</a></li>
+                <li><a href="#category-detail" class="ui-btn">Nagellak</a></li>
+                <li><a href="#category-detail" class="ui-btn">Oogschaduw</a></li>
+                <li><a href="#category-detail" class="ui-btn">Reinigingsproducten</a></li>
+                <li><a href="#category-detail" class="ui-btn">Shampoo</a></li>
+                <li><a href="#category-detail" class="ui-btn">Haarstylingproducten</a></li>
+            </ul>
+
+            <nav class="incMenu"></nav>
+        </div>-->
+
+        <!--<div data-role="page" id="brands">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Merken</h1>
+            <ul data-filter="true" data-filter-placeholder="Zoek merk..." data-inset="true" id="merkInladen">
+                <li><a href="#brand-detail" class="ui-btn">Anastasia</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Artdeco</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Benefit</a></li>
+                <li><a href="#brand-detail" class="ui-btn">BeYu</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Biotherm</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Elizabeth Arden</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Bobbi Brown</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Bourjois</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Calvin Klein</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Catrice</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Chanel</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Clarins</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Clinique</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Collistar</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Deborah</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Dior</a></li>
+                <li><a href="#brand-detail" class="ui-btn">DKNY</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Dove</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Essence</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Essie</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Estee Lauder</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Eylure</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Garnier</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Geurlain</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Gosh</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Giorgio Armani</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Her&ocirc;me</a></li>
+                <li><a href="#brand-detail" class="ui-btn">I love…</a></li>
+                <li><a href="#brand-detail" class="ui-btn">John Frieda</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Kardashian Beauty</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Keune</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Kiehl&#39;s</a></li>
+                <li><a href="#brand-detail" class="ui-btn">KOH</a></li>
+                <li><a href="#brand-detail" class="ui-btn">L&#39;oreal</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Label M</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Lanc&ocirc;me</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Mac</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Make&#45;up Studio</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Mavala</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Max Factor</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Maybelline</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Miss Sporty</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Nivea</a></li>
+                <li><a href="#brand-detail" class="ui-btn">NYC</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Olaz</a></li>
+                <li><a href="#brand-detail" class="ui-btn">OPI</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Pro&#45;set</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Pupa</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Revlon</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Rimmel London</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Rituals</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Sally Hansen</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Schwarzkopf</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Shiseido</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Smashbox</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Syos</a></li>
+                <li><a href="#brand-detail" class="ui-btn">Wella</a></li>
+            </ul>
+
+            <nav class="incMenu"></nav>
+        </div>-->
+
+        <!--<div data-role="page" id="most-wanted">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Meest gewaardeerd</h1>
+            <div class="content" id="output">
+                <p><a href="#review-detail">Eylure Super Full No. 070</a><span class="star"><img src="img/star.png">8.2</span></p>
+                <p><a href="#review-detail">L&#39;Oreal Paris Nude Magique</a><span class="star"><img src="img/star.png">7.5</span></p>
+                <p><a href="#review-detail">Deborah Milano Mascara</a><span class="star"><img src="img/star.png">7.0</span></p>
+            </div>
+
+            <nav class="incMenu"></nav>
+        </div>-->
+
+        <!--<div data-role="page" id="new-reviews">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Nieuwste reviews</h1>
+            <div class="content">
+                <p><a href="#review-detail">Balmain Texturizing Salt spray</a><span class="star"><img src="img/star.png">7.3</span></p>
+                <p><a href="#review-detail">Est&eacute;e Lauder Bronze Goddes</a><span class="star"><img src="img/star.png">8.0</span></p>
+                <p><a href="#review-detail">Bourjois Nagellak</a><span class="star"><img src="img/star.png">6.8</span></p>
+                <p><a href="#review-detail">MAC Lipgloss Limited</a><span class="star"><img src="img/star.png">5.7</span></p>
+                <p><a href="#review-detail">Collistar Duo Bronzing</a><span class="star"><img src="img/star.png">7.4</span></p>
+            </div>
+
+            <nav class="incMenu"></nav>
+        </div>-->
+
+        <div data-role="page" id="login-email">
+            <form id="check-user" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
+                <fieldset>
+                    <div data-role="fieldcontain">
+                        <label for="username">Enter your username:</label>
+                        <input type="text" value="" name="username" id="username"/>
+                    </div>                                 
+                    <div data-role="fieldcontain">                                     
+                        <label for="password">Enter your password:</label>
+                        <input type="password" value="" name="password" id="password"/>
+                    </div>
+                    <input type="button" data-theme="b" name="submit" id="submit" value="Submit">
+                </fieldset>
+            </form>
+        </div>
+
+        <div data-role="page" id="profile">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Mijn profiel</h1>
+            <form method="post" action="" id="profielplaatsen">
+                <input type="text" placeholder="naam" id="naam" name="naam">
+                <input type="text" placeholder="geboortedatum" id="leeftijd" name="leeftijd">
+                <input type="text" placeholder="straat + huisnummer" id="straat" name="straat">
+                <input type="text" pattern="[0-9]{4}[a-zA-Z]{2}" placeholder="1234 AA" id="postcode" name="postcode">
+                <button>Opslaan</button>
+            </form>
+
+            <div class="content">
+                <h3>Mijn reviews (1)</h3>
+                <strong>Essence Nagellak roze</strong>
+                <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>
+
+                <h3>Mijn punten</h3>
+                <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
+            </div>
+
+            <nav class="incMenu"></nav>
+        </div>
+
+        <div data-role="page" id="new">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Nieuwe review</h1>
+            <div class="content">
+                <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
+            </div>
+            <button onClick="takePicture();" class="picture">Foto van uw bon</button>
+            <form method="post" action="" id="reviewplaatsen">
+                <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
+                <!--<input type="text" id="categorie" name="categorie" placeholder="Categorie">-->
+                <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
+                <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
+                <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">
+                <!--<button onClick="takePicture();" class="picture"><img src="img/camera.png"></button>-->
+                <button>Opslaan</button>
+            </form>
+
+            <nav class="incMenu"></nav>
+        </div>
+
+        <div data-role="page" id="review-detail">
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+            <h1>Review detail</h1>
+            <div class="content">
+                <h3>Essence Nagellak roze</h3>
+                <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>
+            </div>
+
+            <nav class="incMenu"></nav>
+        </div>
+    </body>
+</html>

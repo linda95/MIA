@@ -7,15 +7,13 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Re-Beauty</title>
-        <!--<script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>-->
+        <!--<script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>-->
+        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
         <!-- jQuery mobile -->
-        <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" /> -->
         <script type="text/javascript" src="js/jquery.js"></script>
 
-        <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
         <link rel="stylesheet" href="css/jquery.mobile.min.css">
         <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -24,9 +22,8 @@
         <link rel="stylesheet" type="text/css" href="css/pink.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css" />
         
-        <!-- Autocomplete files? -->
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <!-- Autocomplete file -->
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
         <script type="text/javascript" charset="utf-8">
         // Wait for Cordova to load
@@ -105,7 +102,94 @@
         });
         }
 
-        function takePicture(){
+        // Poging tot camera functie
+        var pictureSource;   // picture source
+        var destinationType; // sets the format of returned value
+
+        // Wait for device API libraries to load
+        //
+        document.addEventListener("deviceready",onDeviceReady,false);
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            pictureSource = navigator.camera.PictureSourceType;
+            destinationType = navigator.camera.DestinationType;
+        }
+
+
+        // Called when a photo is successfully retrieved
+        //
+        function onPhotoURISuccess(imageURI) {
+
+            // Show the selected image
+            var smallImage = document.getElementById('smallImage');
+            smallImage.style.display = 'block';
+            smallImage.src = imageURI;
+        }
+
+
+          // A button will call this function
+          //
+         function getPhoto() {
+          // Retrieve image file location from specified source
+          navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+            destinationType: destinationType.FILE_URI });
+          }
+
+          function uploadPhoto() {
+
+            //selected photo URI is in the src attribute (we set this on getPhoto)
+            var imageURI = document.getElementById('smallImage').getAttribute("src");
+            if (!imageURI) {
+                alert('Please select an image first.');
+                return;
+            }
+
+            //set upload options
+            var options = new FileUploadOptions();
+            options.fileKey = "file";
+            options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+
+            options.params = {
+                firstname: document.getElementById("firstname").value,
+                lastname: document.getElementById("lastname").value
+            }
+
+
+            options.headers = {
+              Connection: "close"
+            };
+
+            var ft = new FileTransfer();
+            ft.upload(imageURI, encodeURI("http://i270922.iris.fhict.nl/upload.php"), win, fail,
+
+         options);
+        }
+
+        // Called if something bad happens.
+        //
+        function onFail(message) {
+          console.log('Failed because: ' + message);
+        }
+
+        function win(r) {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            alert("Response =" + r.response);
+            console.log("Sent = " + r.bytesSent);
+        }
+
+        function fail(error) {
+            alert("An error has occurred: Code = " + error.code);
+            console.log("upload error source " + error.source);
+            console.log("upload error target " + error.target);
+        }
+
+        /*function takePicture(){
+            alert(navigator);
         navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
             destinationType: Camera.DestinationType.DATA_URL
         });
@@ -124,8 +208,9 @@
         }
         function onFail(message) {
             alert('Failed because: ' + message);
-        }}
+        }}*/
 
+        // Menu inladen
         $(function(){
             $(".incMenu").load("inc/menu.html");
         });
@@ -349,6 +434,31 @@ var user = {
     });
 });
 
+/*$(function() {
+    var availableTags = '[';
+        $.ajax({
+            url: 'http://i270922.iris.fhict.nl/getreviews.php',
+            dataType: 'jsonp',
+            jsonp: 'jsoncallback',
+            timeout: 5000,
+            success: function(data, status){
+                $.each(data, function(i,item){ 
+                    var tags = '"'+item.merknaam+'",';
+                
+                    availableTags.append(tags);
+                });
+                availableTags.append(']');
+            },
+            error: function(){
+               availableTags.text('There was an error loading the data.');
+            }
+        });
+        prompt(availableTags);
+    $("#merknaam").autocomplete({
+        source: availableTags
+    });
+});*/
+
 $(function() {
     var availableTags = [
         "Anastasia",
@@ -461,6 +571,18 @@ $(function() {
 
         <div data-role="page" id="home">
             <img src="img/re-beauty.png" width="300"><br>
+            <!-- <button onclick="getPhoto();">Select Photo:</button><br>
+            <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
+
+            <form id="regform" enctyp="multipart/form-data">
+                <input type="button" id="btnSubmit" value="Submit" onclick="uploadPhoto();">
+            </form> -->
+            <!-- <div id="camera">
+                <button class="camera-control" onclick="capturePhoto();">Capture Photo</button>
+                <div style="text-align:center;margin:20px;">
+                    <img id="cameraPic" src="" style="width:auto;height:120px;"></img>
+                </div>
+            </div> -->
             <ul id="homeReviews" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
             <!--<a href="#categories" class="ui-btn">Categorie&euml;n</a> --> <!-- Nagellak, mascara etc. -->
             <!--<a href="#brands" class="ui-btn">Merken</a> -->
@@ -469,32 +591,6 @@ $(function() {
 
             <nav class="incMenu"></nav>
         </div>
-
-        <!--<div data-role="page" id="categories">
-            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
-            <h1>Categorie&euml;n</h1>
-            <ul data-filter="true" data-filter-placeholder="Zoek categorie...">
-                <li><a href="#category-detail" class="ui-btn">Blush</a></li>
-                <li><a href="#category-detail" class="ui-btn">Bodylotions</a></li>
-                <li><a href="#category-detail" class="ui-btn">Douchecr&egrave;me</a></li>
-                <li><a href="#category-detail" class="ui-btn">Eyeliner</a></li>
-                <li><a href="#category-detail" class="ui-btn">Foundation</a></li>
-                <li><a href="#category-detail" class="ui-btn">Gezichtsverzorging</a></li>
-                <li><a href="#category-detail" class="ui-btn">Haarlak</a></li>
-                <li><a href="#category-detail" class="ui-btn">Haarmaskers</a></li>
-                <li><a href="#category-detail" class="ui-btn">Kunstnagels &amp; nepwimpers</a></li>
-                <li><a href="#category-detail" class="ui-btn">Lipgloss</a></li>
-                <li><a href="#category-detail" class="ui-btn">Lippenstift</a></li>
-                <li><a href="#category-detail" class="ui-btn">Mascara</a></li>
-                <li><a href="#category-detail" class="ui-btn">Nagellak</a></li>
-                <li><a href="#category-detail" class="ui-btn">Oogschaduw</a></li>
-                <li><a href="#category-detail" class="ui-btn">Reinigingsproducten</a></li>
-                <li><a href="#category-detail" class="ui-btn">Shampoo</a></li>
-                <li><a href="#category-detail" class="ui-btn">Haarstylingproducten</a></li>
-            </ul>
-
-            <nav class="incMenu"></nav>
-        </div>-->
 
         <!--<div data-role="page" id="brands">
             <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
@@ -633,8 +729,15 @@ $(function() {
             <div class="content">
                 <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
             </div>
-            <button onClick="takePicture();" class="picture">Foto van uw bon</button>
-            <form method="post" action="" id="reviewplaatsen">
+            <!-- <button onClick="takePicture();" class="picture">Foto van uw bon</button> -->
+
+            <button onclick="getPhoto();">Select Photo:</button><br>
+            <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
+
+            <form id="regform" enctyp="multipart/form-data">
+                <input type="button" id="btnSubmit" value="Submit" onclick="uploadPhoto();">
+            </form>
+            <form method="post" id="reviewplaatsen">
                 <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
                 <!--<input type="text" id="categorie" name="categorie" placeholder="Categorie">-->
                 <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">

@@ -22,6 +22,12 @@
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="StatusBarBackgroundColor" value="#E91E63" />
@@ -85,4 +91,5 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <engine name="ios" spec="^3.8.0" />
+    <engine name="android" spec="^4.0.0" />
 </widget>
