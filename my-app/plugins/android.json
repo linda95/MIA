@@ -55,6 +55,9 @@
         },
         "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "com.phonegap.re_beauty"
+        },
+        "com.phonegap.plugin.statusbar": {
+            "PACKAGE_NAME": "com.phonegap.re_beauty"
         }
     },
     "dependent_plugins": {}

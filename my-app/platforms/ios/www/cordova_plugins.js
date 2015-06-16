@@ -62,6 +62,13 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugin.statusbar/www/statusbar.js",
+        "id": "com.phonegap.plugin.statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -70,7 +77,8 @@ module.exports.metadata =
     "org.apache.cordova.geolocation": "0.3.12",
     "org.apache.cordova.camera": "0.3.6",
     "cordova-plugin-whitelist": "1.0.0",
-    "cordova-plugin-statusbar": "1.0.0"
+    "cordova-plugin-statusbar": "1.0.0",
+    "com.phonegap.plugin.statusbar": "1.1.0"
 }
 // BOTTOM OF METADATA
 });

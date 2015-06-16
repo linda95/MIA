@@ -46,6 +46,7 @@
 		FDDA1E67FB32450DB597E636 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B64B61C9E1EC415483F386B9 /* CDVJpegHeaderWriter.m */; };
 		1BC9B31E41C94BC2AD8D332C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA844445062140F887BF7B60 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F9682D96E3A44E88A6F6BA6C /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0748F98027274BE6BCF5F7DE /* CDVStatusBar.m */; };
+		51DFDD34DB2B4B23AEF8866E /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B101180184114538ACC0FB9E /* CDVStatusBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		AA844445062140F887BF7B60 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		0748F98027274BE6BCF5F7DE /* CDVStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVStatusBar.m"; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		4BF3EF3630364E4C979788DA /* CDVStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		B101180184114538ACC0FB9E /* CDVStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVStatusBar.m"; path = "com.phonegap.plugin.statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		1693B44088CE4A289CC837E7 /* CDVStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVStatusBar.h"; path = "com.phonegap.plugin.statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +240,8 @@
 				7FF07865027E4226896376E7 /* CDVExif.h */,
 				0748F98027274BE6BCF5F7DE /* CDVStatusBar.m */,
 				4BF3EF3630364E4C979788DA /* CDVStatusBar.h */,
+				B101180184114538ACC0FB9E /* CDVStatusBar.m */,
+				1693B44088CE4A289CC837E7 /* CDVStatusBar.h */,
 			);
 			name = Plugins;
 			path = "Re-Beauty/Plugins";
@@ -426,6 +431,7 @@
 				7B225C29CFE04F24B1FC9EFB /* CDVCamera.m in Sources */,
 				FDDA1E67FB32450DB597E636 /* CDVJpegHeaderWriter.m in Sources */,
 				F9682D96E3A44E88A6F6BA6C /* CDVStatusBar.m in Sources */,
+				51DFDD34DB2B4B23AEF8866E /* CDVStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

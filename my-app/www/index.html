@@ -44,6 +44,33 @@
             var value2 = window.sessionStorage.removeItem("userid");
         }
 
+        function addMenu() {
+            var value3 = window.sessionStorage.getItem("userid");
+            if (value3==null) {
+                //$(".incMenu").hide();
+            }
+            else{
+                //nothing
+            }
+            return true;
+        }
+
+        function refreshPage() {
+          $.mobile.changePage(
+            window.location.href,
+            {
+              allowSamePageTransition : true,
+              transition              : 'none',
+              showLoadMsg             : false,
+              reloadPage              : true
+            }
+          );
+        }
+
+        $(document).on( "click", '#refresh', function() {
+          refreshPage();
+        });
+
         // onSuccess Geolocation
         //
         function onSuccess(position) {
@@ -67,7 +94,7 @@
         var geocoder;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-        } 
+        }
         
         //Get the latitude and the longitude;
         function successFunction(position) {
@@ -141,15 +168,16 @@
 
           // A button will call this function
           //
-         function getPhoto() {
-          // Retrieve image file location from specified source
-          navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        function getPhoto() {
+            // Retrieve image file location from specified source
+            navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
             destinationType: destinationType.FILE_URI });
-          }
+        }
 
-          function uploadPhoto() {
+        function uploadPhoto() {
 
             //selected photo URI is in the src attribute (we set this on getPhoto)
+
             var imageURI = document.getElementById('smallImage').getAttribute("src");
             if (!imageURI) {
                 alert('Please select an image first.');
@@ -164,25 +192,29 @@
             options.chunkedMode = false;
 
             options.params = {
-                firstname: document.getElementById("firstname").value,
-                lastname: document.getElementById("lastname").value
+                merknaam: document.getElementById("merknaam").value,
+                productnaam: document.getElementById("productnaam").value,
+                waardering: document.getElementById("waardering").value,
+                beschrijving: document.getElementById("beschrijving").value
             }
 
+            // var userid = window.sessionStorage.getItem("userid");
+            // options.append(userid);
 
+            //alert('joehoee');
             options.headers = {
               Connection: "close"
             };
 
             var ft = new FileTransfer();
-            ft.upload(imageURI, encodeURI("http://i270922.iris.fhict.nl/upload.php"), win, fail,
+            ft.upload(imageURI, encodeURI("http://i270922.iris.fhict.nl/upload.php"), win, fail, options);
 
-         options);
         }
 
         // Called if something bad happens.
         //
         function onFail(message) {
-          console.log('Failed because: ' + message);
+            console.log('Failed because: ' + message);
         }
 
         function win(r) {
@@ -234,309 +266,345 @@
         
         app.initialize();
         </script>
-            <script>
-    $(document).ready(function() {
-        $('#reviewplaatsen').submit(function(){
-            $('.error').hide();
-            var hasError = false; 
-            var gebruikers_id = '0000000001';
-            var merknaam = $("#merknaam").val();
-            var productnaam = $("#productnaam").val();
-            var categorie = $("#categorie").val();
-            var waardering = $('#waardering').val();
-            var beschrijving = $('#beschrijving').val();
+        <script>
+        $(document).ready(function() {
+            $('#reviewplaatsen').submit(function(){
+                $('.error').hide();
+                var hasError = false; 
+                var gebruikers_id = '0000000001';
+                var merknaam = $("#merknaam").val();
+                var productnaam = $("#productnaam").val();
+                var categorie = $("#categorie").val();
+                var waardering = $('#waardering').val();
+                var beschrijving = $('#beschrijving').val();
 
-            if(hasError == false) {
-                $(this).hide();
-                $.ajax({
-                    type:'POST',
-                    url: 'http://i270922.iris.fhict.nl/postreviews.php',
-                    data : ({ 
-                        review_id:'',
-                        gebruikers_id:gebruikers_id,
-                        merknaam:merknaam,
-                        productnaam:productnaam,
-                        categorie:categorie,
-                        waardering:waardering,
-                        datum:'',
-                        beschrijving:beschrijving,
-                        foto_product:'',
-                        foto_bon:''
-                    }),
-                    success: function(){
-                        // alert('worked');
-                    },
-                    error :function(){
-                        //alert('nope');
-                    },
-                    complete : function(){
-                        //alert('Thank you for your registration you will receive the email with further information soon');
-                        //window.location='index.html#waiting'; 
-                    }
-                });
-            }
-            return false;
-        });
-
-    $('#profielplaatsen').submit(function(){
-            $('.error').hide();
-            var hasError = false; 
-            var gebruiker_id = '';
-            var naam = $("#naam").val();
-            var leeftijd = $("#leeftijd").val();
-            var straat = $("#straat").val();
-            var postcode = $("#postcode").val();
-            var punten = ''
-            var profielfoto = ''
-
-            if(hasError == false) {
-                $(this).hide();
-                $.ajax({
-                    type:'POST',
-                    url: 'http://i270922.iris.fhict.nl/postprofiel.php',
-                    data : ({ 
-                        gebruiker_id:gebruiker_id,
-                        naam:naam,
-                        leeftijd:leeftijd,
-                        straat:straat,
-                        postcode:postcode,
-                        punten:punten,
-                        profielfoto:profielfoto
-                    }),
-                    success: function(){
-                        // alert('worked');
-                    },
-                    error :function(){
-                        //alert('nope');
-                    },
-                    complete : function(){
-                        //alert('Thank you for your registration you will receive the email with further information soon');
-                        //window.location='index.html#waiting'; 
-                    }
-                });
-            }
-            return false;
-        });
-    });
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $(document).bind('deviceready', function(){
-            //Phonegap ready
-            onDeviceReady();
-        });
-
-    // Meest gewaardeerd reviews inladen
-    var output = $('#output');
-
-    $.ajax({
-        url: 'http://i270922.iris.fhict.nl/getreviews.php',
-        dataType: 'jsonp',
-        jsonp: 'jsoncallback',
-        timeout: 5000,
-        success: function(data, status){
-            $.each(data, function(i,item){ 
-                var landmark = '<h1>'+item.merknaam+'</h1>'
-                + '<p>'+item.productnaam+'<br>'
-                + '<p>'+item.waardering+'<br>'
-                + '<p>'+item.datum+'<br>'
-                + item.beschrijving+'</p>';
-            
-                output.append(landmark);
-            });
-        },
-        error: function(){
-           output.text('There was an error loading the data.');
-        }
-    });
-
-    $(document).on('pageinit', '#login-email', function(){ 
-    $(document).on('click', '#submit', function() { // catch the form's submit event
-        if($('#username').val().length > 0 && $('#password').val().length > 0){
-            // Send data to server through the Ajax call
-            // action is functionality we want to call and outputJSON is our data
-                $.ajax({url: 'http://i270922.iris.fhict.nl/check.php',
-                    data: {action : 'login', formData : $('#check-user').serialize()},
-                    type: 'get',                  
-                    async: 'true',
-                    dataType: 'jsonp',
-                    beforeSend: function() {
-                        // This callback function will trigger before data is sent
-                        $.mobile.loading('show', {theme:"a", text:"Please wait...", textonly:true, textVisible: true}); // This will show ajax spinner
-                    },
-                    complete: function() {
-                        // This callback function will trigger on data sent/received complete
-                        $.mobile.loading('hide'); // This will hide ajax spinner
-                    },
-                    success: function (result) {
-                        if(result.status) {
-                            user.name =  result.massage;
-
-                            window.sessionStorage.setItem("userid", result.massage);
-                            var value = window.sessionStorage.getItem("userid");
-
-                            $.mobile.changePage("#home");                        
-                        } else {
-                            alert('Onjuiste inloggegevens!');
-                            //alert(result.status);
-                            //alert(result.massage);
-
+                if(hasError == false) {
+                    $(this).hide();
+                    $.ajax({
+                        type:'POST',
+                        url: 'http://i270922.iris.fhict.nl/postreviews.php',
+                        data : ({ 
+                            review_id:'',
+                            gebruikers_id:gebruikers_id,
+                            merknaam:merknaam,
+                            productnaam:productnaam,
+                            categorie:categorie,
+                            waardering:waardering,
+                            datum:'',
+                            beschrijving:beschrijving,
+                            foto_product:'',
+                            foto_bon:''
+                        }),
+                        success: function(){
+                            // alert('worked');
+                        },
+                        error :function(){
+                            //alert('nope');
+                        },
+                        complete : function(){
+                            //alert('Thank you for your registration you will receive the email with further information soon');
+                            //window.location='index.html#waiting'; 
                         }
-                    },
-                    error: function (request,error) {
-                        // This callback function will trigger on unsuccessful action               
-                        alert('Network error has occurred please try again!');
-                    }
-                });                  
-        } else {
-            alert('Please fill all necessary fields!');
-        }          
-        return false; // cancel original event to prevent form submitting
-    });   
-});
- 
-$(document).on('pagebeforeshow', '#home', function(){ 
-    $.mobile.activePage.find('.ui-content').html('Welcome ' + user.name)
-});
- 
-var user = {
-    name : null
-}
-
-    // Merklijst inladen bij merken
-    var merklijst = $('#merkInladen');
-
-    $.ajax({
-        url: 'http://i270922.iris.fhict.nl/getbrands.php',
-        dataType: 'jsonp',
-        jsonp: 'jsoncallback',
-        timeout: 5000,
-        success: function(data, status){
-            $.each(data, function(i,item){ 
-                var brand = '<li>'+item.merknaam+'</li>';
-            
-                merklijst.append(brand);
+                    });
+                }
+                return false;
             });
-        },
-        error: function(){
-           merklijst.text('There was an error loading the data.');
-        }
-    });
 
-    // Homepagina reviews inladen
-    var reviews = $('#homeReviews');
+        /*$('#profielplaatsen').submit(function(){
+                $('.error').hide();
+                var hasError = false; 
+                var gebruiker_id = '';
+                var naam = $("#naam").val();
+                var leeftijd = $("#leeftijd").val();
+                var straat = $("#straat").val();
+                var postcode = $("#postcode").val();
+                var punten = ''
+                var profielfoto = ''
 
-    $.ajax({
-        url: 'http://i270922.iris.fhict.nl/getreviews.php',
-        dataType: 'jsonp',
-        jsonp: 'jsoncallback',
-        timeout: 5000,
-        success: function(data, status){
-            $.each(data, function(i,item){ 
-                var reviewophalen = '<li><h2>'+item.merknaam+'</h2>'
-                +item.productnaam
-                + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
-                +item.datum+'<br>'
-                + item.beschrijving+'</li>';
-            
-                reviews.append(reviewophalen);
+                if(hasError == false) {
+                    $(this).hide();
+                    $.ajax({
+                        type:'POST',
+                        url: 'http://i270922.iris.fhict.nl/postprofiel.php',
+                        data : ({ 
+                            gebruiker_id:gebruiker_id,
+                            naam:naam,
+                            leeftijd:leeftijd,
+                            straat:straat,
+                            postcode:postcode,
+                            punten:punten,
+                            profielfoto:profielfoto
+                        }),
+                        success: function(){
+                            // alert('worked');
+                        },
+                        error :function(){
+                            //alert('nope');
+                        },
+                        complete : function(){
+                            //alert('Thank you for your registration you will receive the email with further information soon');
+                            //window.location='index.html#waiting'; 
+                        }
+                    });
+                }
+                return false;
+            });*/
+        
+        $('#profielaanmaken').submit(function(){
+                $('.error').hide();
+                var hasError = false; 
+                var gebruiker_id = '';
+                var email = $("#emailadres").val();
+                var wachtwoord = $("#wachtwoord").val();
+                var naam = $("#naam").val();
+                var leeftijd = $("#leeftijd").val();
+                var straat = $("#straat").val();
+                var postcode = $("#postcode").val();
+                var punten = ''
+                var profielfoto = ''
+
+                if(hasError == false) {
+                    //$(this).hide();
+                    $.ajax({
+                        type:'POST',
+                        url: 'http://i270922.iris.fhict.nl/postprofiel.php',
+                        data : ({ 
+                            gebruiker_id:gebruiker_id,
+                            email:email,
+                            wachtwoord:wachtwoord,
+                            naam:naam,
+                            leeftijd:leeftijd,
+                            straat:straat,
+                            postcode:postcode,
+                            punten:punten,
+                            profielfoto:profielfoto
+                        }),
+                        success: function(){
+                            // alert('worked');
+                            //window.location.href = "#home";
+                            //window.location.replace('#home');
+                        },
+                        error :function(){
+                            //alert('nope');
+                        },
+                        complete : function(){
+                            //alert('Thank you for your registration you will receive the email with further information soon');
+                            //window.location='index.html#waiting'; 
+                        }
+                    });
+                }
+                return false;
             });
-        },
-        error: function(){
-           reviews.text('There was an error loading the data.');
-        }
-    });
-});
 
-/*$(function() {
-    var availableTags = '[';
-        $.ajax({
-            url: 'http://i270922.iris.fhict.nl/getreviews.php',
-            dataType: 'jsonp',
-            jsonp: 'jsoncallback',
-            timeout: 5000,
-            success: function(data, status){
-                $.each(data, function(i,item){ 
-                    var tags = '"'+item.merknaam+'",';
-                
-                    availableTags.append(tags);
-                });
-                availableTags.append(']');
-            },
-            error: function(){
-               availableTags.text('There was an error loading the data.');
-            }
+            $('#maak-aan').click(function() {
+                $.mobile.changePage($("#home"), 'pop');
+            });
         });
-        prompt(availableTags);
-    $("#merknaam").autocomplete({
-        source: availableTags
-    });
-});*/
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).bind('deviceready', function(){
+                //Phonegap ready
+                onDeviceReady();
+            });
 
-$(function() {
-    var availableTags = [
-        "Anastasia",
-        "Artdeco",
-        "Benefit",
-        "BeYu",
-        "Biotherm",
-        "Elizabeth Arden",
-        "Bobbi Brown",
-        "Bourjois",
-        "Calvin Klein",
-        "Catrice",
-        "Chanel",
-        "Clarins",
-        "Clinique",
-        "Deborah",
-        "Dior",
-        "DKNY",
-        "Dove",
-        "Essence",
-        "Essie",
-        "Estee Lauder",
-        "Eylure",
-        "Garnier",
-        "Geurlain",
-        "Gosh",
-        "Giorgio Armani",
-        "Herome",
-        "I love…",
-        "John Frieda",
-        "Kardashian Beauty",
-        "Keune",
-        "Kiehl’s",
-        "KOH",
-        "L’oreal",
-        "Label M",
-        "Lancome",
-        "Mac",
-        "Make-up Studio",
-        "Mavala",
-        "Max Factor",
-        "Maybelline",
-        "Miss Sporty",
-        "Nivea",
-        "NYC",
-        "Olaz",
-        "OPI",
-        "Pro-set",
-        "Pupa",
-        "Revlon",
-        "Rimmel London",
-        "Rituals",
-        "Sally Hansen",
-        "Schwarzkopf",
-        "Shiseido",
-        "Smashbox",
-        "Syos",
-        "Wella"
-    ];
-    $("#merknaam").autocomplete({
-        source: availableTags
-    });
-});
-</script>
+            // Meest gewaardeerd reviews inladen
+            var output = $('#output');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        var landmark = '<h1>'+item.merknaam+'</h1>'
+                        + '<p>'+item.productnaam+'<br>'
+                        + '<p>'+item.waardering+'<br>'
+                        + '<p>'+item.datum+'<br>'
+                        + item.beschrijving+'</p>';
+                    
+                        output.append(landmark);
+                    });
+                },
+                error: function(){
+                   output.text('There was an error loading the data.');
+                }
+            });
+
+            $(document).on('pageinit', '#login-email', function(){ 
+                $(document).on('click', '#submit', function() { // catch the form's submit event
+                    if($('#username').val().length > 0 && $('#password').val().length > 0){
+                        // Send data to server through the Ajax call
+                        // action is functionality we want to call and outputJSON is our data
+                            $.ajax({url: 'http://i270922.iris.fhict.nl/check.php',
+                                data: {action : 'login', formData : $('#check-user').serialize()},
+                                type: 'get',                  
+                                async: 'true',
+                                dataType: 'jsonp',
+                                beforeSend: function() {
+                                    // This callback function will trigger before data is sent
+                                    $.mobile.loading('show', {theme:"a", text:"Please wait...", textonly:true, textVisible: true}); // This will show ajax spinner
+                                },
+                                complete: function() {
+                                    // This callback function will trigger on data sent/received complete
+                                    $.mobile.loading('hide'); // This will hide ajax spinner
+                                },
+                                success: function (result) {
+                                    if(result.status) {
+                                        user.name =  result.massage;
+
+                                        window.sessionStorage.setItem("userid", result.massage);
+                                        var value = window.sessionStorage.getItem("userid");
+
+                                        $.mobile.changePage("#home");                        
+                                    } else {
+                                        alert('Onjuiste inloggegevens!');
+                                        //alert(result.status);
+                                        //alert(result.massage);
+
+                                    }
+                                },
+                                error: function (request,error) {
+                                    // This callback function will trigger on unsuccessful action               
+                                    alert('Network error has occurred please try again!');
+                                }
+                            });                  
+                    } else {
+                        alert('Please fill all necessary fields!');
+                    }          
+                    return false; // cancel original event to prevent form submitting
+                });   
+            });
+         
+            $(document).on('pagebeforeshow', '#home', function(){ 
+                $.mobile.activePage.find('.ui-content').html('Welcome ' + user.name)
+            });
+         
+            var user = {
+                name : null
+            }
+
+            // Merklijst inladen bij merken
+            var merklijst = $('#merkInladen');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getbrands.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        var brand = '<li>'+item.merknaam+'</li>';
+                    
+                        merklijst.append(brand);
+                    });
+                },
+                error: function(){
+                   merklijst.text('There was an error loading the data.');
+                }
+            });
+
+            // Homepagina reviews inladen
+            var reviews = $('#homeReviews');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2>'
+                        +item.productnaam
+                        + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                        +item.datum+'<br>'
+                        +item.beschrijving+'<br><span style="display:none;">'
+                        +item.review_id+'</span></li>';
+                    
+                        reviews.append(reviewophalen);
+                    });
+                },
+                error: function(){
+                   reviews.text('There was an error loading the data.');
+                }
+            });
+
+            // mijn reviews inladen
+            var mijnreviews = $('#mijnReviews');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        if (item.gebruikers_id.search(new RegExp(/2/i)) != -1) {
+                            //alert(item.merknaam);
+                            
+                            var getmyreviews = '<li><h2>'+item.merknaam+'</h2>'
+                            +item.productnaam
+                            + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                            +item.datum+'<br>'
+                            +item.beschrijving+'<br><span style="display:none;">'
+                            +item.review_id+'</span></li>';
+                        
+                            mijnreviews.append(getmyreviews);
+                            return;
+                        }
+                        
+                    });
+                },
+                error: function(){
+                   mijnreviews.text('There was an error loading the data.');
+                }
+            });
+        });
+
+        /*$(function() {
+            var availableTags = '[';
+                $.ajax({
+                    url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                    dataType: 'jsonp',
+                    jsonp: 'jsoncallback',
+                    timeout: 5000,
+                    success: function(data, status){
+                        $.each(data, function(i,item){ 
+                            var tags = '"'+item.merknaam+'",';
+                        
+                            availableTags.append(tags);
+                        });
+                        availableTags.append(']');
+                    },
+                    error: function(){
+                       availableTags.text('There was an error loading the data.');
+                    }
+                });
+                prompt(availableTags);
+            $("#merknaam").autocomplete({
+                source: availableTags
+            });
+        });*/
+
+        $(function() {
+            var availableTags = [
+                "Anastasia", "Artdeco", "Benefit", "BeYu", "Biotherm", "Elizabeth Arden", "Bobbi Brown", "Bourjois", "Calvin Klein", "Catrice", "Chanel", "Clarins", "Clinique", "Deborah", "Dior", "DKNY", "Dove", "Essence", "Essie", "Estee Lauder", "Eylure", "Garnier", "Geurlain", "Gosh", "Giorgio Armani", "Herome", "I love…", "John Frieda", "Kardashian Beauty", "Keune", "Kiehl’s", "KOH", "L’oreal", "Label M", "Lancome", "Mac", "Make-up Studio", "Mavala", "Max Factor", "Maybelline", "Miss Sporty", "Nivea", "NYC", "Olaz", "OPI", "Pro-set", "Pupa", "Revlon", "Rimmel London", "Rituals", "Sally Hansen", "Schwarzkopf", "Shiseido", "Smashbox", "Syos", "Wella"
+            ];
+            $("#merknaam").autocomplete({
+                source: availableTags
+            });
+        });
+
+        $(function() {
+            var availableProducts = [
+            "I love extreme – volume mascara", "I love extreme crazy volume mascara", "Get BIG! lashes volume boost mascara", "Get BIG! lashes volume boost waterproof mascara", "Get BIG! lashes triple black mascara", "Lash and brow gel mascara", "LASH mania reloaded mascara", "All eyes on me multi-effect mascara", "All eyes on me waterproof multi-effect mascara", "Maximum definition volume mascara", "Multi action mascara", "Maximum volume mascara", "Lash base mascara", "Get BIG! lashes volume curl mascara", "LASH mania reloaded waterproof mascara", "Plump no clump! volume mascara", "Plump no clump! deep black volume mascara", "Lash princess volume mascara", "I like long lashes! volume & length mascara", "Lash princess false lash effect mascara", "How to make nude eyes make-up box", "How to make smokey eyes make-up box", "Smokey eyes set", "3D eyeshadow", "I love nude eyeshadow", "Mono eyeshadow", "Crystal eyeliner", "Kajal pencil", "Super fine eyeliner pen", "2in1 eyeliner pen", "Liquid ink eyeliner", "Liquid ink eyeliner waterproof", "Eyeliner pen", "Liquid eyeliner", "Liquid eyeliner waterproof", "Long lasting eye pencil", "Gel eye pencil waterproof", "Big bright eyes jumbo pencil", "Eyeliner pen waterproof", "Effect eye pencil", "Liquid ink high shine eyeliner", "Liquid ink matt eyeliner", "Easy 2 use eyeliner pen", "Eyebrow designer", "Eyebrow stylist set", "Eyebrow tweezer", "How to make brows wow make-up box", "2 in 1 lash brow comb", "Make me brow eyebrow gel mascara", "Eyebrow fixing pencil", "Frame for fame lashes", "Frame for fame wimperlijm", "Beauty secrets fancy lashes", "I love stage – eyeshadow base", "Pure skin anti-spot compact powder", "Pure skin anti-spot cover stick", "Pure skin anti-spot mousse make-up", "Nail polish remover hardening", "Nail polish remover moisturizing", "Nail art nail polish remover ultra", "Quick & easy sponge nail polish remover", "Studio nails nail polish correct pen", "Effect nail polish", "The gel nail polish", "I love trends nail polish the nudes", "I love trends nail polish the pastels", "Nail art cracking top coat", "Nail art DUO stylist", "Nail art designer set", "Nail art stampy set", "Nail art stampy designs", "Nail art stampy polish", "Nail art sticker", "Nail art hello foils! transfer foils", "Nail art hello foils! transfer solution", "GLOW in the night click & go nails", "Thermo nail polish", "Nail art sparkle sand top coat", "Nail art shake me! I’m pretty top coat", "Nail art thermo click & go nails", "French click & go nails", "French manicure & pedicure pen", "Tip painter", "French manicure top guides", "Nailwhite pencil", "French manicure brush", "French manicure creative tip guides", "Quick dry top coat", "Protecting base coat", "Sealing top coat", "Studio nails ultra gloss nail shine", "Better than gel nails top sealer high gloss", "Gel look plumping top coat", "The gel nail polish base coat", "The gel nail polish top coat", "Nail art satin matt top coat", "Nail art pastel ombré top coat", "Express dry drops", "Express dry spray", "Studio nails ultra nail repair", "Studio nails hardening nail base", "Studio nails anti-split nail sealer", "Studio nails XXL nail thickener", "Studio nails ultra strong nail hardener", "Studio nails snelle nagelriem remover", "Studio nails verzorgende nagelolie", "Studio nails fix it! nagellijm", "Studio nails hydraterende nagelriemcrème", "Nail candies", "Studio nails all in ONE complete care", "Studio nails jelly pearls hydrating gel", "Studio nails nail & cuticle brush", "Studio nails nail cuticle remover pen", "Studio nails nail care pen", "Quick & easy sponge nail caring oil", "Studio nails professional cuticle pusher", "Studio nails pro white care", "Studio nails pro white rosé", "Studio nails pro white effect", "Studio nails pro white nail hardener", "Studio nails 2way profi nagelvijl", "Studio nails banana nagelvijl", "Studio nails sweet minivijl", "2in1 profi nagelvijl", "Studio nails professional 4in1 nagelvijl", "Studio nails 6in1 buffervijl", "Studio nails nail preparation buffer", "Lipliner", "Longlasting lipliner", "XXXL shine lipgloss", "Glossy lipbalm", "Mini lipgloss set", "XXXL longlasting lipgloss matt effect", "Effect lipgloss", "XXXL nude lipgloss", "Lip candies beautifying lip care", "Lipstick", "Longlasting lipstick", "Longlasting lipstick nude", "Kiss care love lipbalm", "All about matt! Fixing compact powder", "Mosaic powder", "Mattifying compact powder", "Sun club matt bronzing powder", "Stay all day 12h long-lasting powder", "All about matt! oil control paper", "Pure NUDE powder", "All-in-one BB cream", "Soft touch mousse make-up", "All about matt! oil free make-up", "Soft & natural make-up", "Stay all day 16h long-lasting make-up", "All-in-one CC cream clear & correct", "All about matt! oil control make-up base", "Match2cover! cream concealer", "Stay all day 16h long-lasting concealer", "Coverstick", "Stay natural concealer", "Say no to redness – colour correcting concealer", "Say no to imperfections – colour correcting concealer", "Say no to dark circles – colour correcting concealer", "All about matt! high covering concealer", "Silky touch blush", "Blush up! Powder blush", "Soo blush! cream to powder blush", "Soo glow! cream to powder highlighter", "How to make your face glow make-up box", "Sun club matt bronzing powder", "Sun club shimmer bronzing powder", "Sun club 2in1 bronzing powder"
+            ];
+            $("#productnaam").autocomplete({
+                source: availableProducts
+            });
+        });
+        </script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     </head>
     <body onload="initialize()">
@@ -552,11 +620,17 @@ $(function() {
 
             <h1>Inloggen</h1>
             <img src="img/re-beauty.png" width="300">
+           <!--  <button onclick="getPhoto();">Select Photo:</button><br>
+            <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
+
+            <form id="regform" enctyp="multipart/form-data">
+                <input type="button" id="btnSubmit" value="Submit" onclick="uploadPhoto();">
+            </form> -->
             <div class="content">
                 <p>Re-beauty is een onafhankelijk review-app voor beautyproducten. Wij verifiëren of reviews door echte gebruikers geplaatst zijn en helpen hiermee het beste beautyproduct te vinden. Door zelf reviews te plaatsen kun je ook nog eens sparen voor korting op nieuwe artikelen.</p>
             </div>
             <a href="#login-email" class="ui-btn">Email login</a>
-            <a href="#home" class="ui-btn">Reviews bekijken</a>
+            <a href="#home" onClick="return addMenu();" class="ui-btn">Reviews bekijken</a>
             <a href="#create-profile" class="ui-btn">Account aanmaken</a>
         </div>
 
@@ -697,30 +771,34 @@ $(function() {
             <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
             <h1>Profiel aanmaken</h1>
             <form method="post" action="" id="profielaanmaken">
-                <input type="email" placeholder="emailadres" name="username" id="username"/>
-                <input type="password" placeholder="wachtwoord" name="password" id="password"/>
+                <input type="email" placeholder="emailadres" name="emailadres" id="emailadres"/>
+                <input type="password" placeholder="wachtwoord" name="wachtwoord" id="wachtwoord"/>
                 <input type="text" placeholder="naam" id="naam" name="naam">
-                <input type="text" placeholder="geboortedatum" id="leeftijd" name="leeftijd">
+                <input type="date" placeholder="geboortedatum" id="leeftijd" name="leeftijd">
                 <input type="text" placeholder="straat + huisnummer" id="straat" name="straat">
                 <input type="text" pattern="[0-9]{4}[a-zA-Z]{2}" placeholder="1234 AA" id="postcode" name="postcode">
-                <button>Aanmaken</button>
+                <button id="maak-aan">Aanmaken</button>
             </form>
         </div>
 
         <div data-role="page" id="profile">
             <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
             <h1>Mijn profiel</h1>
-            <ul>
-                <li>naam</li>
-                <li>geboortedatum</li>
-                <li>straat + huisnummer</li>
-                <li>postcode</li>
-            </ul>
-
             <div class="content">
-                <h3>Mijn reviews (1)</h3>
-                <strong>Essence Nagellak roze</strong>
-                <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>
+                <!--<ul>
+                    <li>naam</li>
+                    <li>geboortedatum</li>
+                    <li>straat + huisnummer</li>
+                    <li>postcode</li>
+                </ul>
+
+                <a class="edit" href="#edit-profile"><img src="img/edit.png"></a>-->
+                <button onClick="uitloggen();">Uitloggen</button>
+            
+                <h3>Mijn reviews</h3>
+                <ul id="mijnReviews" data-role="listview"></ul>
+                <!--<strong>Essence Nagellak roze</strong>
+                <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>-->
 
                 <h3>Mijn punten</h3>
                 <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
@@ -729,19 +807,19 @@ $(function() {
             <nav class="incMenu"></nav>
         </div>
 
-        <div data-role="page" id="edit-profile">
+        <!--<div data-role="page" id="edit-profile">
             <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
             <h1>Mijn profiel</h1>
             <form method="post" action="" id="profielplaatsen">
                 <input type="text" placeholder="naam" id="naam" name="naam">
-                <input type="text" placeholder="geboortedatum" id="leeftijd" name="leeftijd">
+                <input type="date" placeholder="geboortedatum" id="leeftijd" name="leeftijd">
                 <input type="text" placeholder="straat + huisnummer" id="straat" name="straat">
                 <input type="text" pattern="[0-9]{4}[a-zA-Z]{2}" placeholder="1234 AA" id="postcode" name="postcode">
                 <button>Opslaan</button>
             </form>
 
             <nav class="incMenu"></nav>
-        </div>
+        </div>-->
 
         <div data-role="page" id="new">
             <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
@@ -749,17 +827,16 @@ $(function() {
             <div class="content">
                 <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
             </div>
-            <!-- <button onClick="takePicture();" class="picture">Foto van uw bon</button> -->
 
-            <button onclick="getPhoto();">Foto van uw bon:</button><br>
+            <button onclick="getPhoto();">Foto van uw bon</button><br>
             <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
 
-            <form id="regform" enctyp="multipart/form-data">
+            <form id="regform" enctyp="multipart/form-data" method="post">
                 <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
                 <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
                 <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
                 <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">
-                <input type="button" class="ui-btn" id="btnSubmit" value="Submit" onclick="uploadPhoto();">
+                <input type="button" class="ui-btn" id="btnSubmit" value="Opslaan" onclick="uploadPhoto();">
             </form>
             
             <!--<form method="post" id="reviewplaatsen">
@@ -774,7 +851,7 @@ $(function() {
             <nav class="incMenu"></nav>
         </div>
 
-        <div data-role="page" id="review-detail">
+        <!--<div data-role="page" id="review-detail">
             <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
             <h1>Review detail</h1>
             <div class="content">
@@ -783,6 +860,6 @@ $(function() {
             </div>
 
             <nav class="incMenu"></nav>
-        </div>
+        </div>-->
     </body>
 </html>

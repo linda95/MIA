@@ -93,6 +93,12 @@ ul {
     margin-right: 5px;
 }
 
+.edit {
+    position: absolute;
+    top: 40px;
+    right: 0;
+}
+
 /*.star:before {
     content: "";
     display: inline-block;
@@ -175,4 +181,8 @@ h1 {
 .ui-menu-item {
     background-color: rgba(252, 228, 236, 1);
     padding: 5px;
+}
+
+.ui-li-static.ui-body-inherit {
+    height: 100px;
 }

@@ -31,6 +31,18 @@
                         {
                             "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" onload=\"true\" value=\"CDVStatusBar\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"false\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarBackgroundColor\" value=\"#000000\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -92,6 +104,9 @@
             "PACKAGE_NAME": "com.phonegap.re-beauty"
         },
         "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.phonegap.re-beauty"
+        },
+        "com.phonegap.plugin.statusbar": {
             "PACKAGE_NAME": "com.phonegap.re-beauty"
         }
     },
