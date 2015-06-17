@@ -183,6 +183,7 @@ h1 {
     padding: 5px;
 }
 
-.ui-li-static.ui-body-inherit {
-    height: 100px;
+.logo {
+    margin: 0 auto;
+    display: block;
 }

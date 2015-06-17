@@ -48,11 +48,12 @@
             var value3 = window.sessionStorage.getItem("userid");
             if (value3==null) {
                 //$(".incMenu").hide();
+                $.mobile.changePage($("#home2"), 'pop');
+                return false;
             }
             else{
-                //nothing
+                return true;
             }
-            return true;
         }
 
         function refreshPage() {
@@ -73,7 +74,7 @@
 
         // onSuccess Geolocation
         //
-        function onSuccess(position) {
+        /*function onSuccess(position) {
             var element = document.getElementById('geolocation');
             element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                                 'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -137,7 +138,7 @@
             alert("Geocoder failed due to: " + status);
         }
         });
-        }
+        }*/
 
         // Poging tot camera functie
         var pictureSource;   // picture source
@@ -195,11 +196,9 @@
                 merknaam: document.getElementById("merknaam").value,
                 productnaam: document.getElementById("productnaam").value,
                 waardering: document.getElementById("waardering").value,
-                beschrijving: document.getElementById("beschrijving").value
+                beschrijving: document.getElementById("beschrijving").value,
+                gebruikers_id: window.sessionStorage.getItem("userid")
             }
-
-            // var userid = window.sessionStorage.getItem("userid");
-            // options.append(userid);
 
             //alert('joehoee');
             options.headers = {
@@ -221,6 +220,7 @@
             console.log("Code = " + r.responseCode);
             console.log("Response = " + r.response);
             alert("Response =" + r.response);
+            alert("Uw review is geplaatst");
             console.log("Sent = " + r.bytesSent);
         }
 
@@ -268,10 +268,10 @@
         </script>
         <script>
         $(document).ready(function() {
-            $('#reviewplaatsen').submit(function(){
+            /*$('#reviewplaatsen').submit(function(){
                 $('.error').hide();
                 var hasError = false; 
-                var gebruikers_id = '0000000001';
+                var gebruikers_id = window.sessionStorage.getItem('userid');
                 var merknaam = $("#merknaam").val();
                 var productnaam = $("#productnaam").val();
                 var categorie = $("#categorie").val();
@@ -308,7 +308,7 @@
                     });
                 }
                 return false;
-            });
+            });*/
 
         /*$('#profielplaatsen').submit(function(){
                 $('.error').hide();
@@ -530,8 +530,8 @@
                 }
             });
 
-            // mijn reviews inladen
-            var mijnreviews = $('#mijnReviews');
+            // Homepagina2 reviews inladen
+            var reviews2 = $('#homeReviews2');
 
             $.ajax({
                 url: 'http://i270922.iris.fhict.nl/getreviews.php',
@@ -540,7 +540,36 @@
                 timeout: 5000,
                 success: function(data, status){
                     $.each(data, function(i,item){ 
-                        if (item.gebruikers_id.search(new RegExp(/2/i)) != -1) {
+                        var reviewophalen2 = '<li><h2>'+item.merknaam+'</h2>'
+                        +item.productnaam
+                        + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                        +item.datum+'<br>'
+                        +item.beschrijving+'<br><span style="display:none;">'
+                        +item.review_id+'</span></li>';
+                    
+                        reviews2.append(reviewophalen2);
+                    });
+                },
+                error: function(){
+                   reviews2.text('There was an error loading the data.');
+                }
+            });
+
+            // mijn reviews inladen
+            var mijnreviews = $('#mijnReviews');
+            var mijnpunten = $('#gespaarde-punten');
+            var gebruiker = window.sessionStorage.getItem('userid');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getuser.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        //if (item.gebruikers_id.search(new RegExp(/2/i)) != -1) {
+                        var regexp = new RegExp(gebruiker, 'i');
+                        if (item.gebruikers_id.search(regexp) != -1) {
                             //alert(item.merknaam);
                             
                             var getmyreviews = '<li><h2>'+item.merknaam+'</h2>'
@@ -549,11 +578,13 @@
                             +item.datum+'<br>'
                             +item.beschrijving+'<br><span style="display:none;">'
                             +item.review_id+'</span></li>';
-                        
+
+                            var puntenweergeven = 'U heeft '+item.punten+' gespaarde punten.';
+                            
+                            mijnpunten.replaceWith(puntenweergeven);
                             mijnreviews.append(getmyreviews);
                             return;
                         }
-                        
                     });
                 },
                 error: function(){
@@ -565,7 +596,7 @@
         /*$(function() {
             var availableTags = '[';
                 $.ajax({
-                    url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                    url: 'http://i270922.iris.fhict.nl/getbrands.php',
                     dataType: 'jsonp',
                     jsonp: 'jsoncallback',
                     timeout: 5000,
@@ -574,14 +605,16 @@
                             var tags = '"'+item.merknaam+'",';
                         
                             availableTags.append(tags);
+                            //alert(tags);
+                            return;
                         });
-                        availableTags.append(']');
+                        availableTags.append('];');
                     },
                     error: function(){
                        availableTags.text('There was an error loading the data.');
                     }
                 });
-                prompt(availableTags);
+                alert(availableTags);
             $("#merknaam").autocomplete({
                 source: availableTags
             });
@@ -619,7 +652,7 @@
             <a href="#pagetwo">Pagina twee</a>-->
 
             <h1>Inloggen</h1>
-            <img src="img/re-beauty.png" width="300">
+            <img src="img/re-beauty.png" width="300" class="logo">
            <!--  <button onclick="getPhoto();">Select Photo:</button><br>
             <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
 
@@ -635,7 +668,7 @@
         </div>
 
         <div data-role="page" id="home">
-            <img src="img/re-beauty.png" width="300"><br>
+            <img src="img/re-beauty.png" class="logo" width="300"><br>
             <!-- <button onclick="getPhoto();">Select Photo:</button><br>
             <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
 
@@ -655,6 +688,11 @@
             <!-- <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a> -->
 
             <nav class="incMenu"></nav>
+        </div>
+
+        <div data-role="page" id="home2">
+            <img src="img/re-beauty.png" class="logo" width="300"><br>
+            <ul id="homeReviews2" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
         </div>
 
         <!--<div data-role="page" id="brands">
@@ -801,7 +839,7 @@
                 <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>-->
 
                 <h3>Mijn punten</h3>
-                <p>U heeft ... gespaarde punten</p> <!-- gespaarde punten met PHP ophalen. -->
+                <p id="gespaarde-punten"></p> <!-- gespaarde punten met PHP ophalen. -->
             </div>
 
             <nav class="incMenu"></nav>
