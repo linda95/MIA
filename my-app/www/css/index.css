@@ -76,13 +76,16 @@ ul {
 
 .menu li {
     display: inline-block;
-    width: 32%;
-    margin-right: 3px;
+    width: 32.4%;
     /*width: 103px;*/
 }
 
 .menu li:last-of-type {
     margin-right: 0; 
+}
+
+.container {
+    padding-bottom: 65px;
 }
 
 .star {
