@@ -695,24 +695,26 @@ $('#homereviewsrefresh').click(){
         </div>
 
         <div data-role="page" id="home">
-            <img src="img/re-beauty.png" class="logo" width="300"><br>
-            <!-- <button onclick="getPhoto();">Select Photo:</button><br>
-            <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
+            <div class="container">
+                <img src="img/re-beauty.png" class="logo" width="300"><br>
+                <!-- <button onclick="getPhoto();">Select Photo:</button><br>
+                <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
 
-            <form id="regform" enctyp="multipart/form-data">
-                <input type="button" id="btnSubmit" value="Submit" onclick="uploadPhoto();">
-            </form> -->
-            <!-- <div id="camera">
-                <button class="camera-control" onclick="capturePhoto();">Capture Photo</button>
-                <div style="text-align:center;margin:20px;">
-                    <img id="cameraPic" src="" style="width:auto;height:120px;"></img>
-                </div>
-            </div> -->
-            <ul id="homeReviews" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
-            <!--<a href="#categories" class="ui-btn">Categorie&euml;n</a> --> <!-- Nagellak, mascara etc. -->
-            <!--<a href="#brands" class="ui-btn">Merken</a> -->
-            <!--<a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> --> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
-            <!-- <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a> -->
+                <form id="regform" enctyp="multipart/form-data">
+                    <input type="button" id="btnSubmit" value="Submit" onclick="uploadPhoto();">
+                </form> -->
+                <!-- <div id="camera">
+                    <button class="camera-control" onclick="capturePhoto();">Capture Photo</button>
+                    <div style="text-align:center;margin:20px;">
+                        <img id="cameraPic" src="" style="width:auto;height:120px;"></img>
+                    </div>
+                </div> -->
+                <ul id="homeReviews" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
+                <!--<a href="#categories" class="ui-btn">Categorie&euml;n</a> --> <!-- Nagellak, mascara etc. -->
+                <!--<a href="#brands" class="ui-btn">Merken</a> -->
+                <!--<a href="#most-wanted" class="ui-btn">Meest gewaardeerd</a> --> <!-- Producten die het meeste gewaardeerd zijn door gebruikers -->
+                <!-- <a href="#new-reviews" class="ui-btn">Nieuwste reviews</a> -->
+            </div>
 
             <nav class="incMenu"></nav>
         </div>
@@ -847,26 +849,28 @@ $('#homereviewsrefresh').click(){
         </div>
 
         <div data-role="page" id="profile">
-            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
-            <h1>Mijn profiel</h1>
-            <div class="content">
-                <!--<ul>
-                    <li>naam</li>
-                    <li>geboortedatum</li>
-                    <li>straat + huisnummer</li>
-                    <li>postcode</li>
-                </ul>
+            <div class="container">
+                <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+                <h1>Mijn profiel</h1>
+                <div class="content">
+                    <!--<ul>
+                        <li>naam</li>
+                        <li>geboortedatum</li>
+                        <li>straat + huisnummer</li>
+                        <li>postcode</li>
+                    </ul>
 
-                <a class="edit" href="#edit-profile"><img src="img/edit.png"></a>-->
-                <button onClick="uitloggen();">Uitloggen</button>
-            
-                <h3>Mijn reviews</h3>
-                <ul id="mijnReviews" data-role="listview"></ul>
-                <!--<strong>Essence Nagellak roze</strong>
-                <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>-->
+                    <a class="edit" href="#edit-profile"><img src="img/edit.png"></a>-->
+                
+                    <h3>Mijn reviews</h3>
+                    <ul id="mijnReviews" data-role="listview"></ul>
+                    <!--<strong>Essence Nagellak roze</strong>
+                    <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>-->
 
-                <h3>Mijn punten</h3>
-                <p id="gespaarde-punten"></p> <!-- gespaarde punten met PHP ophalen. -->
+                    <h3>Mijn punten</h3>
+                    <p id="gespaarde-punten"></p> <!-- gespaarde punten met PHP ophalen. -->
+                    <button onClick="uitloggen();">Uitloggen</button>
+                </div>
             </div>
 
             <nav class="incMenu"></nav>
@@ -887,31 +891,33 @@ $('#homereviewsrefresh').click(){
         </div>-->
 
         <div data-role="page" id="new">
-            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
-            <h1>Nieuwe review</h1>
-            <div class="content">
-                <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
+            <div class="container">
+                <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
+                <h1>Nieuwe review</h1>
+                <div class="content">
+                    <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
+                </div>
+
+                <button onclick="getPhoto();">Foto van uw bon</button><br>
+                <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
+
+                <form id="regform" enctyp="multipart/form-data" method="post">
+                    <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
+                    <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
+                    <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
+                    <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">
+                    <input type="button" class="ui-btn" id="btnSubmit" value="Opslaan" onclick="uploadPhoto();">
+                </form>
+                
+                <!--<form method="post" id="reviewplaatsen">
+                    <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
+                    <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
+                    <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
+                    <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">-->
+                    <!--<button onClick="takePicture();" class="picture"><img src="img/camera.png"></button>-->
+                    <!--<button>Opslaan</button>
+                </form>-->
             </div>
-
-            <button onclick="getPhoto();">Foto van uw bon</button><br>
-            <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
-
-            <form id="regform" enctyp="multipart/form-data" method="post">
-                <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
-                <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
-                <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
-                <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">
-                <input type="button" class="ui-btn" id="btnSubmit" value="Opslaan" onclick="uploadPhoto();">
-            </form>
-            
-            <!--<form method="post" id="reviewplaatsen">
-                <input type="text" id="merknaam" name="merknaam" placeholder="Merk">
-                <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam">
-                <textarea placeholder="Details" id="beschrijving" name="beschrijving"></textarea>
-                <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering">-->
-                <!--<button onClick="takePicture();" class="picture"><img src="img/camera.png"></button>-->
-                <!--<button>Opslaan</button>
-            </form>-->
 
             <nav class="incMenu"></nav>
         </div>
