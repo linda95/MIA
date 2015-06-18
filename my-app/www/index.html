@@ -408,6 +408,7 @@
                 onDeviceReady();
             });
 
+
             // Meest gewaardeerd reviews inladen
             var output = $('#output');
 
@@ -530,6 +531,32 @@
                 }
             });
 
+$('#homereviewsrefresh').click(){
+    var reviews3 = $('#homeReviews');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2><div style="white-space: nowrap; overflow: visible; text-overflow: clip; max-height: 100px;">'
+                        +item.productnaam
+                        + '</div><span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                        +item.datum+'<br>'
+                        +item.beschrijving+'<br><span style="display:none;">'
+                        +item.review_id+'</span></li>';
+                    
+                        reviews3.append(reviewophalen);
+                    });
+                },
+                error: function(){
+                   reviews3.text('There was an error loading the data.');
+                }
+            });
+
+}
             // Homepagina2 reviews inladen
             var reviews2 = $('#homeReviews2');
 
