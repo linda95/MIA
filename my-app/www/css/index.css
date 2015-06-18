@@ -201,3 +201,8 @@ h1 {
     left: 5px;
     width: auto;
 }
+
+
+.ui-li-static.ui-body-inherit {
+    white-space: normal !important;
+}
