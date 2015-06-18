@@ -181,9 +181,11 @@
 
             var imageURI = document.getElementById('smallImage').getAttribute("src");
             if (!imageURI) {
-                alert('Please select an image first.');
+                alert('Maak een foto van um bon.');
                 return;
             }
+
+            alert("Versturen...");
 
             //set upload options
             var options = new FileUploadOptions();
@@ -213,19 +215,19 @@
         // Called if something bad happens.
         //
         function onFail(message) {
-            console.log('Failed because: ' + message);
+            console.log('Er is een probleem opgetreden: ' + message);
         }
 
         function win(r) {
             console.log("Code = " + r.responseCode);
             console.log("Response = " + r.response);
-            alert("Response =" + r.response);
+            //alert("Response =" + r.response);
             alert("Uw review is geplaatst");
             console.log("Sent = " + r.bytesSent);
         }
 
         function fail(error) {
-            alert("An error has occurred: Code = " + error.code);
+            alert("Error: Code = " + error.code);
             console.log("upload error source " + error.source);
             console.log("upload error target " + error.target);
         }
@@ -429,7 +431,7 @@
                     });
                 },
                 error: function(){
-                   output.text('There was an error loading the data.');
+                   output.text('Probleem met het laden van de data.');
                 }
             });
 
@@ -445,7 +447,7 @@
                                 dataType: 'jsonp',
                                 beforeSend: function() {
                                     // This callback function will trigger before data is sent
-                                    $.mobile.loading('show', {theme:"a", text:"Please wait...", textonly:true, textVisible: true}); // This will show ajax spinner
+                                    $.mobile.loading('show', {theme:"a", text:"Even geduld...", textonly:true, textVisible: true}); // This will show ajax spinner
                                 },
                                 complete: function() {
                                     // This callback function will trigger on data sent/received complete
@@ -468,11 +470,11 @@
                                 },
                                 error: function (request,error) {
                                     // This callback function will trigger on unsuccessful action               
-                                    alert('Network error has occurred please try again!');
+                                    alert('Netwerk error, probeer later nog eens!');
                                 }
                             });                  
                     } else {
-                        alert('Please fill all necessary fields!');
+                        alert('Vul alle velden in!');
                     }          
                     return false; // cancel original event to prevent form submitting
                 });   
@@ -502,7 +504,7 @@
                     });
                 },
                 error: function(){
-                   merklijst.text('There was an error loading the data.');
+                   merklijst.text('Probleem met het laden van de data.');
                 }
             });
 
@@ -527,36 +529,10 @@
                     });
                 },
                 error: function(){
-                   reviews.text('There was an error loading the data.');
+                   reviews.text('Probleem met het laden van de data.');
                 }
             });
 
-$('#homereviewsrefresh').click(){
-    var reviews3 = $('#homeReviews');
-
-            $.ajax({
-                url: 'http://i270922.iris.fhict.nl/getreviews.php',
-                dataType: 'jsonp',
-                jsonp: 'jsoncallback',
-                timeout: 5000,
-                success: function(data, status){
-                    $.each(data, function(i,item){ 
-                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2><div style="white-space: nowrap; overflow: visible; text-overflow: clip; max-height: 100px;">'
-                        +item.productnaam
-                        + '</div><span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
-                        +item.datum+'<br>'
-                        +item.beschrijving+'<br><span style="display:none;">'
-                        +item.review_id+'</span></li>';
-                    
-                        reviews3.append(reviewophalen);
-                    });
-                },
-                error: function(){
-                   reviews3.text('There was an error loading the data.');
-                }
-            });
-
-}
             // Homepagina2 reviews inladen
             var reviews2 = $('#homeReviews2');
 
@@ -578,7 +554,7 @@ $('#homereviewsrefresh').click(){
                     });
                 },
                 error: function(){
-                   reviews2.text('There was an error loading the data.');
+                   reviews2.text('Probleem met het laden van de data.');
                 }
             });
 
@@ -615,7 +591,7 @@ $('#homereviewsrefresh').click(){
                     });
                 },
                 error: function(){
-                   mijnreviews.text('There was an error loading the data.');
+                   mijnreviews.text('Probleem met het laden van de data.');
                 }
             });
         });
@@ -695,6 +671,33 @@ $('#homereviewsrefresh').click(){
         </div>
 
         <div data-role="page" id="home">
+            <script type="text/javascript">
+            $(document).on('pagebeforeshow', function(){
+
+    var reviews3 = $('#homeReviews');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    $.each(data, function(i,item){ 
+                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2><div style="white-space: nowrap; overflow: visible; text-overflow: clip; max-height: 100px;">'
+                        +item.productnaam
+                        + '</div><span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                        +item.datum+'<br>'
+                        +item.beschrijving+'<br><span style="display:none;">'
+                        +item.review_id+'</span></li>';
+                    
+                        reviews3.append(reviewophalen);
+                    });
+                },
+                error: function(){
+                   reviews3.text('There was an error loading the data.');
+                }
+            });
+}</script>
             <div class="container">
                 <img src="img/re-beauty.png" class="logo" width="300"><br>
                 <!-- <button onclick="getPhoto();">Select Photo:</button><br>
@@ -720,7 +723,6 @@ $('#homereviewsrefresh').click(){
         </div>
 
         <div data-role="page" id="home2">
-            <a class="back-button" href="javascript:history.back()"><img src="img/terug.png"></a>
             <img src="img/re-beauty.png" class="logo" width="300"><br>
             <ul id="homeReviews2" data-role="listview" data-filter="true" data-filter-placeholder="Zoek review..."></ul> <!-- data-filter-reveal="true" -->
         </div>
@@ -818,8 +820,7 @@ $('#homereviewsrefresh').click(){
         </div>-->
 
         <div data-role="page" id="login-email">
-            <!-- <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a> -->
-            <a class="back-button" href="javascript:history.back()"><img src="img/terug.png"></a>
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
             <h1>Email login</h1>
             <form id="check-user" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
                 <fieldset>
@@ -837,8 +838,7 @@ $('#homereviewsrefresh').click(){
         </div>
 
         <div data-role="page" id="create-profile">
-            <!-- <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a> -->
-            <a class="back-button" href="javascript:history.back()"><img src="img/terug.png"></a>
+            <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
             <h1>Profiel aanmaken</h1>
             <form method="post" action="" id="profielaanmaken">
                 <input type="email" placeholder="emailadres" name="emailadres" id="emailadres"/>
@@ -853,8 +853,7 @@ $('#homereviewsrefresh').click(){
 
         <div data-role="page" id="profile">
             <div class="container">
-                <!-- <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a> -->
-                <a class="back-button" href="javascript:history.back()"><img src="img/terug.png"></a>
+                <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
                 <h1>Mijn profiel</h1>
                 <div class="content">
                     <!--<ul>
@@ -896,8 +895,7 @@ $('#homereviewsrefresh').click(){
 
         <div data-role="page" id="new">
             <div class="container">
-                <!-- <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a> -->
-                <a class="back-button" href="javascript:history.back()"><img src="img/terug.png"></a>
+                <a class="back-button" href="javascript:history.back()" style="color:white !important;"><span>&lt; Terug</span></a>
                 <h1>Nieuwe review</h1>
                 <div class="content">
                     <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
