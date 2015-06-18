@@ -519,73 +519,51 @@
                 }
             });
 
+
             // Homepagina reviews inladen
-            var reviews = $('#homeReviews');
+            
 
-            $.ajax({
-                url: 'http://i270922.iris.fhict.nl/getreviews.php',
-                dataType: 'jsonp',
-                jsonp: 'jsoncallback',
-                timeout: 5000,
-                success: function(data, status){
-                    $.each(data, function(i,item){ 
-                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2><div style="white-space: nowrap; overflow: visible; text-overflow: clip; max-height: 100px;">'
-                        +item.productnaam
-                        + '</div><span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
-                        +item.datum+'<br>'
-                        +item.beschrijving+'<br><span style="display:none;">'
-                        +item.review_id+'</span></li>';
-                    
-                        reviews.append(reviewophalen);
-                        setTimeout(function(){alerten();}, 10000);
-                    });
-                },
-                error: function(){
-                   reviews.text('Probleem met het laden van de data.');
-                }
-            });
+// function alerten(){
+//     var reviews3 = $('#homeReviews');
 
-function alerten(){
-    var reviews3 = $('#homeReviews');
+//             $.ajax({
+//                 url: 'http://i270922.iris.fhict.nl/getreviews.php',
+//                 dataType: 'jsonp',
+//                 jsonp: 'jsoncallback',
+//                 timeout: 5000,
+//                 success: function(data, status){
+//                     $.each(data, function(i,item){ 
+//                         html += 
+//                         '<li><h2>'
+//                         +item.merknaam+
+//                         '</h2>'
+//                         +item.productnaam+
+//                         '<span class="star"><img src="img/star.png">' 
+//                         + item.waardering+
+//                         '</span><br>'
+//                         +item.datum+
+//                         '<br>'
+//                         +item.beschrijving+
+//                         '<br><span style="display:none;">'
+//                         +item.review_id+
+//                         '</span></li>';
 
-            $.ajax({
-                url: 'http://i270922.iris.fhict.nl/getreviews.php',
-                dataType: 'jsonp',
-                jsonp: 'jsoncallback',
-                timeout: 5000,
-                success: function(data, status){
-                    $.each(data, function(i,item){ 
-                        html += 
-                        '<li><h2>'
-                        +item.merknaam+
-                        '</h2>'
-                        +item.productnaam+
-                        '<span class="star"><img src="img/star.png">' 
-                        + item.waardering+
-                        '</span><br>'
-                        +item.datum+
-                        '<br>'
-                        +item.beschrijving+
-                        '<br><span style="display:none;">'
-                        +item.review_id+
-                        '</span></li>';
-
-                        alert("update");
-                    $('#homeReviews').empty();
-                    $('#homeReviews').append($(html));
-                    $('#homeReviews').trigger('create');
-                    $('#homeReviews').listview('refresh');
-                    $('#homeReviews ul').listview('refresh');
-                    //reviews3.html($(html));
-                    //reviews3.listview()('refresh');
-                        //reviews3.replaceWith(reviewophalen);
-                    });
-                },
-                error: function(){
-                   reviews3.text('Probleem met het laden van de data.');
-                }
-            });
-}
+//                         alert("update");
+//                     $('#homeReviews').empty();
+//                     $('#homeReviews').append($(html));
+//                     $('#homeReviews').trigger('create');
+//                     $('#homeReviews').listview('refresh');
+//                     $('#homeReviews ul').listview('refresh');
+//                     //reviews3.html($(html));
+//                     //reviews3.listview()('refresh');
+//                         //reviews3.replaceWith(reviewophalen);
+//                     });
+//                 },
+//                 error: function(){
+//                    reviews3.text('Probleem met het laden van de data.');
+//                 }
+//             });
+// }
 
             // Homepagina2 reviews inladen
             var reviews2 = $('#homeReviews2');
@@ -612,6 +590,10 @@ function alerten(){
                 }
             });
 
+setInterval(function()
+{ 
+          //do something with response data
+
             // mijn reviews inladen
             var mijnreviews = $('#mijnReviews');
             var mijnpunten = $('#gespaarde-punten');
@@ -623,31 +605,58 @@ function alerten(){
                 jsonp: 'jsoncallback',
                 timeout: 5000,
                 success: function(data, status){
+                    mijnreviews.empty();
+                    mijnpunten.empty();
                     $.each(data, function(i,item){ 
                         //if (item.gebruikers_id.search(new RegExp(/2/i)) != -1) {
                         var regexp = new RegExp(gebruiker, 'i');
                         if (item.gebruikers_id.search(regexp) != -1) {
                             //alert(item.merknaam);
                             
-                            var getmyreviews = '<li><h2>'+item.merknaam+'</h2>'
+                            var getmyreviews = '<li><div class="lijntje"><h2>'+item.merknaam+'</h2>'
                             +item.productnaam
                             + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
                             +item.datum+'<br>'
                             +item.beschrijving+'<br><span style="display:none;">'
-                            +item.review_id+'</span></li>';
+                            +item.review_id+'</span></div><hr></li>';
 
                             var puntenweergeven = 'U heeft '+item.punten+' gespaarde punten.';
                             
                             mijnpunten.replaceWith(puntenweergeven);
                             mijnreviews.append(getmyreviews);
-                            return;
                         }
                     });
                 },
                 error: function(){
-                   mijnreviews.text('Probleem met het laden van de data.');
+                   mijnreviews.text('Refreshen...');
                 }
             });
+
+    var reviews = $('#homeReviews');
+
+            $.ajax({
+                url: 'http://i270922.iris.fhict.nl/getreviews.php',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                timeout: 5000,
+                success: function(data, status){
+                    reviews.empty();
+                    $.each(data, function(i,item){ 
+                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2>'
+                        +item.productnaam
+                        + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
+                        +item.datum+'<br>'
+                        +item.beschrijving+'<br><span style="display:none;">'
+                        +item.review_id+'</span><hr></li>';
+                    
+                        reviews.append(reviewophalen);
+                    });
+                },
+                error: function(){
+                   reviews.text('Refreshen...');
+                }
+            });
+}, 10000);
         });
 
         /*$(function() {
@@ -904,7 +913,7 @@ function alerten(){
                     <a class="edit" href="#edit-profile"><img src="img/edit.png"></a>-->
                 
                     <h3>Mijn reviews</h3>
-                    <ul id="mijnReviews" data-role="listview"></ul>
+                    <ul id="mijnReviews" data-role="listview" data-inset="true"></ul>
                     <!--<strong>Essence Nagellak roze</strong>
                     <p>Deze nagellak werkt erg fijn, je hoeft maar een keer over je nagel heen en het zit er al meteen mooi op!<span class="star"><img src="img/star.png">8.2</span></p>-->
 

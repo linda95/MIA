@@ -206,3 +206,8 @@ h1 {
 .ui-li-static.ui-body-inherit {
     white-space: normal !important;
 }
+
+.lijntje {
+    border-bottom: 1px !important;
+    border-color: #000 !important;
+}
