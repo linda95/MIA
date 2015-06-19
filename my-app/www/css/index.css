@@ -216,3 +216,7 @@ h1 {
     width: 50%;
     float: left;
 }
+
+.extra-ruimte {
+    margin-bottom: 65px !important;
+}
