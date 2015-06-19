@@ -613,12 +613,12 @@ setInterval(function()
                         if (item.gebruikers_id.search(regexp) != -1) {
                             //alert(item.merknaam);
                             
-                            var getmyreviews = '<li><div class="lijntje"><h2>'+item.merknaam+'</h2>'
+                            var getmyreviews = '<li style="background-color: white; border-bottom: 1px solid #dddddd; padding: .7em 1em; border-radius: 0px;"><h2>'+item.merknaam+'</h2>'
                             +item.productnaam
                             + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
                             +item.datum+'<br>'
                             +item.beschrijving+'<br><span style="display:none;">'
-                            +item.review_id+'</span></div><hr></li>';
+                            +item.review_id+'</span></li>';
 
                             var puntenweergeven = 'U heeft '+item.punten+' gespaarde punten.';
                             
@@ -642,12 +642,12 @@ setInterval(function()
                 success: function(data, status){
                     reviews.empty();
                     $.each(data, function(i,item){ 
-                        var reviewophalen = '<li><h2>'+item.merknaam+'</h2>'
+                        var reviewophalen = '<li style="background-color: white; border-bottom: 1px solid #dddddd; padding: .7em 1em; border-radius: 0px;"><h2>'+item.merknaam+'</h2>'
                         +item.productnaam
                         + '<span class="star"><img src="img/star.png">' + item.waardering+'</span><br>'
                         +item.datum+'<br>'
                         +item.beschrijving+'<br><span style="display:none;">'
-                        +item.review_id+'</span><hr></li>';
+                        +item.review_id+'</span></li>';
                     
                         reviews.append(reviewophalen);
                     });
@@ -656,7 +656,7 @@ setInterval(function()
                    reviews.text('Refreshen...');
                 }
             });
-}, 10000);
+}, 100000);
         });
 
         /*$(function() {
@@ -876,7 +876,7 @@ setInterval(function()
                         <label for="password">Je wachtwoord:</label>
                         <input type="password" value="" name="password" id="password" required/>
                     </div>
-                    <input type="button" data-theme="b" class="ui-btn" name="submit" id="submit" value="Inloggen">
+                    <input type="button" data-theme="b" class="ui-btn helft-knop" name="submit" id="submit" value="Inloggen">
                 </fieldset>
             </form>
         </div>
@@ -919,7 +919,7 @@ setInterval(function()
 
                     <h3>Mijn punten</h3>
                     <p id="gespaarde-punten"></p> <!-- gespaarde punten met PHP ophalen. -->
-                    <button onClick="uitloggen();">Uitloggen</button>
+                    <button class="helft-knop" onClick="uitloggen();">Uitloggen</button>
                 </div>
             </div>
 
@@ -946,10 +946,10 @@ setInterval(function()
                 <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
                 <h1>Nieuwe review</h1>
                 <div class="content">
-                    <p>Maak hier je nieuwe review aan, neem ook een foto van je product!</p>
+                    <p>Maak hier je nieuwe review aan. Vergeet geen foto van je bon te maken, zodat wij betrouwbare reviews kunnen tonen.</p>
                 </div>
 
-                <button onclick="getPhoto();">Foto van uw bon</button><br>
+                <button class="helft-knop" onclick="getPhoto();"><img src="img/camera.png"></button><br>
                 <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
 
                 <form id="regform" enctyp="multipart/form-data" method="post">
@@ -957,7 +957,8 @@ setInterval(function()
                     <input type="text" id="productnaam" name="productnaam" placeholder="Productnaam" required>
                     <textarea placeholder="Details" id="beschrijving" name="beschrijving" required></textarea>
                     <input type="number" step="0.1" min="1" max="10" placeholder="Beoordeling (1 t/m 10)" id="waardering" name="waardering" required>
-                    <input type="button" class="ui-btn" id="btnSubmit" value="Opslaan" onclick="uploadPhoto();">
+                    <input type="button" class="ui-btn helft-knop" id="btnSubmit" value="Opslaan" onclick="uploadPhoto();">
+                    <input type="reset" class="ui-btn helft-knop" value="Velden wissen">
                 </form>
                 
                 <!--<form method="post" id="reviewplaatsen">
